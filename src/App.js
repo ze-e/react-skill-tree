@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
-import ItemElement from './components/ItemElement.js';
+import GroupElement from './components/GroupElement.js';
 
 function App() {
 
-  const [ITEMS, setItems] = React.useState([]);
   const [ID, setID] = React.useState(0);
-  const [GROUP, setGroup] = React.useState(1);
+  const [GROUP, setGroup] = React.useState(0);
+  const [GROUPS, setGroups] = React.useState([]);
 
   class Item {
     constructor({
@@ -31,24 +31,30 @@ function App() {
   }
   
   function insertContent(){
-    const columnSize = document.querySelector(".add-form").elements["number"].value;
-    addItem();
+    setGroup(GROUP + 1);
+    const childSize = document.querySelector(".add-form").elements["number"].value;
+    const itemsToAdd = [];
+
+    for(let i = 1; i <= childSize; i++){
+      const newItem = addItem();
+      itemsToAdd.push(newItem);
+    }
+
+    setGroups([...GROUPS, [itemsToAdd]]);
   }
   
   function addItem(){ 
     const newItem = new Item({
-      name : "myItem",
+      name : "myItem"
     });
-    //new item has been added
-    setItems([...ITEMS, newItem]);
-    setID(ID+1);
-    console.log(`created item ${newItem} and added to item list in group ${GROUP}. ${JSON.stringify(ITEMS)}`)
-  }
+    setID(ID + 1);
+    return newItem;
+   }
 
   return (
     <div className="App">
     <ol className="column">
-      {ITEMS.length > 0 && ITEMS.map(item => <ItemElement key={item.id} name = {item.name} xp = {item.xp} />)}
+      {GROUPS.length > 0 && GROUPS.map(group => <GroupElement key={index} children={group} />)}
     </ol>
     <form className="add-form" onSubmit={handleSubmit}>
       <input name="number" type="number" max="4" min="1" defaultValue="1" ></input>

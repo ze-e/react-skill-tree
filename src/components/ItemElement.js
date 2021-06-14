@@ -1,8 +1,6 @@
 function ItemElement(props) {
   return(
-    <ol className="item">
-      <li className="item__content">{props.name} - {props.xp}</li>
-    </ol>
+    <li className="item__content">{props.name} - {props.xp}</li>
   )
 }
 
