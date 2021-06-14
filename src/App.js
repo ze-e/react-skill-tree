@@ -28,11 +28,14 @@ function App() {
   function handleSubmit(e){
     e.preventDefault();
     insertContent();
+    console.log(JSON.stringify(GROUPS));
   }
   
   function insertContent(){
     setGroup(GROUP + 1);
-    const childSize = document.querySelector(".add-form").elements["number"].value;
+    let childSize = document.querySelector(".add-form").elements["number"].value;
+    const prev = GROUPS[GROUP-1] ? GROUPS[GROUP-1].length : 1;
+    childSize = childSize * prev;
     const itemsToAdd = [];
 
     for(let i = 1; i <= childSize; i++){
@@ -40,25 +43,25 @@ function App() {
       itemsToAdd.push(newItem);
     }
 
-    setGroups([...GROUPS, [itemsToAdd]]);
+    setGroups([...GROUPS, itemsToAdd]);
   }
   
   function addItem(){ 
+    setID(ID+1);
     const newItem = new Item({
       name : "myItem"
     });
-    setID(ID + 1);
     return newItem;
    }
 
   return (
     <div className="App">
-    <ol className="column">
-      {GROUPS.length > 0 && GROUPS.map(group => <GroupElement key={index} children={group} />)}
-    </ol>
-    <form className="add-form" onSubmit={handleSubmit}>
-      <input name="number" type="number" max="4" min="1" defaultValue="1" ></input>
-      <button type="submit">Add Item</button>
+      <ol className="column">
+        {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} children={group} />)}
+      </ol>
+      <form className="add-form" onSubmit={handleSubmit}>
+        <input name="number" type="number" max="4" min="1" defaultValue="1" ></input>
+        <button type="submit">Add Item</button>
       </form>
     </div>
   );
