@@ -34,22 +34,42 @@ function App() {
   function insertContent(){
     setGroup(GROUP + 1);
     let childSize = document.querySelector(".add-form").elements["number"].value;
-    const prev = GROUPS[GROUP-1] ? GROUPS[GROUP-1].length : 1;
-    childSize = childSize * prev;
-    const itemsToAdd = [];
+    //const prev = GROUPS[GROUP-1] ? GROUPS[GROUP-1].length : 1;
+    //childSize = childSize * prev;
+    //const itemsToAdd = [];
+    // for(let i = 1; i <= childSize; i++){
+    //   const newItem = addItem();
+    //   itemsToAdd.push(newItem);
+    // }
 
-    for(let i = 1; i <= childSize; i++){
-      const newItem = addItem();
-      itemsToAdd.push(newItem);
+    const itemsToAdd = [];
+    if(GROUP === 0){
+      for(let i = 1; i <= childSize; i++){
+        const newItem = addItem();
+        itemsToAdd.push(newItem);
+    }
+  }
+
+    if(GROUP > 0){
+      const prevGroup = GROUPS[GROUP-1];
+      prevGroup.forEach(item => {
+        for(let i = 1; i <= childSize; i++){
+          const newItem = addItem({parent : item});
+          itemsToAdd.push(newItem);
+          item.children.push(newItem);
+        }
+      });
+
     }
 
     setGroups([...GROUPS, itemsToAdd]);
   }
   
-  function addItem(){ 
+  function addItem({parent = null}){ 
     setID(ID+1);
     const newItem = new Item({
-      name : "myItem"
+      name : "myItem",
+      parent : parent    
     });
     return newItem;
    }
