@@ -1,4 +1,5 @@
 import './App.css';
+import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import GroupElement from './components/GroupElement.js';
 
@@ -10,7 +11,7 @@ function App() {
 
   class Item {
     constructor({
-      name="New Item",
+      name=uuidv4(),
       xp=10,
       parent,
       children=[],
