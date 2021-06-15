@@ -54,7 +54,7 @@ function App() {
       const prevGroup = GROUPS[GROUP-1];
       prevGroup.forEach(item => {
         for(let i = 1; i <= childSize; i++){
-          const newItem = addItem({parent : item});
+          const newItem = addItem({parent:item});
           itemsToAdd.push(newItem);
           item.children.push(newItem);
         }
@@ -65,7 +65,7 @@ function App() {
     setGroups([...GROUPS, itemsToAdd]);
   }
   
-  function addItem({parent = null}){ 
+  function addItem({parent=null}={}){ 
     setID(ID+1);
     const newItem = new Item({
       name : "myItem",
