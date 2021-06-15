@@ -6,10 +6,17 @@
 ol{
   padding-inline-start: 0px;
 }
+
 .column{
   list-style: none;
   display: flex;
 }
+
+.column.selected{
+  border: 1px solid black;
+  background-color: aliceblue;
+}
+
 .item{
   list-style: none;
   display: flex;
