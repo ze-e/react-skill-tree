@@ -76,9 +76,11 @@ function App() {
 
   return (
     <div className="App">
-      <ol className="column">
-        {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} children={group} />)}
-      </ol>
+      <div className="timeline">
+        <ol className="column">
+          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} children={group} />)}
+        </ol>
+      </div>
       <form className="add-form" onSubmit={handleSubmit}>
         <input name="number" type="number" max="4" min="1" defaultValue="1" ></input>
         <button type="submit">Add Item</button>
