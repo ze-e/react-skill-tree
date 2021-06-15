@@ -12,8 +12,8 @@ function App() {
     constructor({
       name="New Item",
       xp=10,
-      parent=null,
-      children=[]
+      parent,
+      children=[],
     }={}){
     
     this.id = ID;
@@ -28,7 +28,7 @@ function App() {
   function handleSubmit(e){
     e.preventDefault();
     insertContent();
-    console.log(JSON.stringify(GROUPS));
+    console.log(GROUPS);
   }
   
   function insertContent(){
@@ -65,7 +65,7 @@ function App() {
     setGroups([...GROUPS, itemsToAdd]);
   }
   
-  function addItem({parent=null}={}){ 
+  function addItem({parent}={}){ 
     setID(ID+1);
     const newItem = new Item({
       name : "myItem",
