@@ -5,6 +5,7 @@ import GroupElement from './components/GroupElement.js';
 
 function App() {
 
+  const [selectedGroup, setSelectedGroup] = React.useState([]);
   const [ID, setID] = React.useState(0);
   const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
@@ -32,12 +33,23 @@ function App() {
   function handleSubmit(e){
     e.preventDefault();
     insertContent();
-    console.log(GROUPS);
+  }
+
+  function handleClick(e){
+    const oldSelected = document.querySelector('.selected');
+    oldSelected && oldSelected != null && oldSelected.classList.remove('selected');
+    const selected = e.target.closest('.item');
+
+    if(selected && selected != null){
+      selected.classList.add('selected');
+      const group = selected.id;
+      group && setSelectedGroup(GROUPS[group]);
+    }
   }
   
   function insertContent(){
     setGroup(GROUP + 1);
-    let childSize = document.querySelector(".add-form").elements["number"].value;
+    const childSize = document.querySelector(".add-form").elements["number"].value;
 
     const itemsToAdd = [];
     if(GROUP === 0){
@@ -80,13 +92,15 @@ function App() {
         <input name="number" type="number" max="4" min="1" defaultValue="1" ></input>
         <button type="submit">Add Item</button>
       </form>
-
+      <div class="data">
+        <h1>{selectedGroup[0] && selectedGroup[0].id && selectedGroup[0].id}</h1>
+      </div>
       <div className="timeline">
-        <ol className="column">
-          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} children={group} />)}
+        <ol className="column" onClick={handleClick}>
+          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} children={group} />)}
         </ol>
       </div>
-      
+
     </div>
   );
 }

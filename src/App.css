@@ -12,9 +12,9 @@ ol{
   display: flex;
 }
 
-.column.selected{
+.item.selected{
   border: 1px solid black;
-  background-color: aliceblue;
+  background-color: lightgray;
 }
 
 .item{
