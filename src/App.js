@@ -11,10 +11,11 @@ function App() {
 
   class Item {
     constructor({
-      name=uuidv4(),
+      name="new item",
       xp=10,
       parent,
       children=[],
+      color='black',
     }={}){
     
     this.id = ID;
@@ -23,6 +24,7 @@ function App() {
     this.group = GROUP;
     this.parent = parent;
     this.children = children;
+    this.color = color;
     }
   }
   
@@ -35,18 +37,13 @@ function App() {
   function insertContent(){
     setGroup(GROUP + 1);
     let childSize = document.querySelector(".add-form").elements["number"].value;
-    //const prev = GROUPS[GROUP-1] ? GROUPS[GROUP-1].length : 1;
-    //childSize = childSize * prev;
-    //const itemsToAdd = [];
-    // for(let i = 1; i <= childSize; i++){
-    //   const newItem = addItem();
-    //   itemsToAdd.push(newItem);
-    // }
 
     const itemsToAdd = [];
+    const colors = ["red","orange","yellow","blue","lblue","green","purple","pink"];
     if(GROUP === 0){
       for(let i = 1; i <= childSize; i++){
-        const newItem = addItem();
+        const color = colors[Math.floor(Math.random()*colors.length)]
+        const newItem = addItem({color});
         itemsToAdd.push(newItem);
     }
   }
@@ -55,7 +52,7 @@ function App() {
       const prevGroup = GROUPS[GROUP-1];
       prevGroup.forEach(item => {
         for(let i = 1; i <= childSize; i++){
-          const newItem = addItem({parent:item});
+          const newItem = addItem({parent:item,color:item.color});
           itemsToAdd.push(newItem);
           item.children.push(newItem);
         }
@@ -66,11 +63,12 @@ function App() {
     setGroups([...GROUPS, itemsToAdd]);
   }
   
-  function addItem({parent}={}){ 
+  function addItem({parent, color='black'}={}){ 
     setID(ID+1);
     const newItem = new Item({
-      name : "myItem",
-      parent : parent    
+      name : uuidv4().slice(0,4),
+      parent,
+      color,    
     });
     return newItem;
    }

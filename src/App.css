@@ -12,12 +12,48 @@ ol{
   justify-content: center;
   align-items: center;
   text-align: center;
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 .item__content{
   text-align: center;
   padding: 10px;
   margin: 10px;
-  border: 2px solid black;
+  border: 1px solid black;
+}
+
+.item__content.black{
+  border: 1px solid black;
+}
+
+.item__content.red{
+  border: 1px solid red;
+}
+
+.item__content.orange{
+  border: 1px solid orange;
+}
+
+.item__content.yellow{
+  border: 1px solid yellow;
+}
+
+.item__content.blue{
+  border: 1px solid blue;
+}
+
+.item__content.lblue{
+  border: 1px solid lightblue;
+}
+
+.item__content.green{
+  border: 1px solid green;
+}
+
+.item__content.purple{
+  border: 1px solid purple;
+}
+
+.item__content.pink{
+  border: 1px solid pink;
 }
