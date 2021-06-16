@@ -1,6 +1,7 @@
 import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
+import Colors from './util/Colors';
 import GroupElement from './components/GroupElement.js';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   const [ID, setID] = React.useState(0);
   const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
-  const colors = ["red","orange","yellow","blue","lblue","green","purple","pink"];
+  //const colors = ["red","orange","yellow","blue","lblue","green","purple","pink"];
 
   class Item {
     constructor({
@@ -48,12 +49,16 @@ function App() {
   }
   
   function insertContent(){
+
     setGroup(GROUP + 1);
     const childSize = document.querySelector(".add-form").elements["number"].value;
 
     const itemsToAdd = [];
+
+
     if(GROUP === 0){
-    const color = colors[Math.floor(Math.random()*colors.length)]
+    //const color = colors[Math.floor(Math.random()*colors.length)]
+    const color = new Colors().chooseUniqueColor();
       for(let i = 1; i <= childSize; i++){
         const newItem = addItem({color});
         itemsToAdd.push(newItem);
@@ -63,7 +68,8 @@ function App() {
     if(GROUP > 0){
       const prevGroup = GROUPS[GROUP-1];
       prevGroup.forEach(item => {
-      const color = colors[Math.floor(Math.random()*colors.length)]
+      //const color = colors[Math.floor(Math.random()*colors.length)]
+        const color = new Colors().chooseUniqueColor();
         for(let i = 1; i <= childSize; i++){
           const newItem = addItem({parent:item,color});
           itemsToAdd.push(newItem);
