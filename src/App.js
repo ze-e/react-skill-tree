@@ -2,7 +2,8 @@ import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import Colors from './util/Colors';
-import GroupElement from './components/GroupElement.js';
+import GroupElement from './components/GroupElement';
+import GroupData from './components/GroupData';
 
 function App() {
 
@@ -97,7 +98,7 @@ function App() {
       </form>
       <div class="data">
         <h1>{selectedGroup[0] && selectedGroup[0].group && selectedGroup[0].group}</h1>
-          <GroupData key={index} children={group} />
+          <GroupData children={GROUPS[selectedGroup]} />
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
