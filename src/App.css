@@ -33,6 +33,17 @@ ol{
   border: 1px solid black;
 }
 
+.item__content.item__content_invisible{
+  visibility:hidden;
+  display: none;
+}
+
+
+.item__content.item__content_visible{
+  visibility: visible;
+  display: block;
+}
+
 .black{
   border: 1px solid black;
 }

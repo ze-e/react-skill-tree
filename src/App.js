@@ -51,14 +51,12 @@ function App() {
 
     setGroup(GROUP + 1);
     const childSize = document.querySelector(".add-form").elements["number"].value;
-
     const itemsToAdd = [];
+
     //create groupColor
     const GroupColors = new Colors();
 
-
     if(GROUP === 0){
-    //const color = colors[Math.floor(Math.random()*colors.length)]
     const color = GroupColors.chooseUniqueColor();
       for(let i = 1; i <= childSize; i++){
         const newItem = addItem({color});
@@ -69,8 +67,7 @@ function App() {
     if(GROUP > 0){
       const prevGroup = GROUPS[GROUP-1];
       prevGroup.forEach(item => {
-      //const color = colors[Math.floor(Math.random()*colors.length)]
-        const color = GroupColors.chooseUniqueColor();
+      const color = GroupColors.chooseUniqueColor();
         for(let i = 1; i <= childSize; i++){
           const newItem = addItem({parent:item,color});
           itemsToAdd.push(newItem);
@@ -99,14 +96,13 @@ function App() {
         <button type="submit">Add Item</button>
       </form>
       <div class="data">
-        <h1>{selectedGroup[0] && selectedGroup[0].id && selectedGroup[0].id}</h1>
+        {/* <h1>{selectedGroup[0] && selectedGroup[0].id && selectedGroup[0].id}</h1> */}
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
-          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} children={group} />)}
+          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={group === selectedGroup && true} children={group} />)}
         </ol>
       </div>
-
     </div>
   );
 }
