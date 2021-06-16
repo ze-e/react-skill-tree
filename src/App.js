@@ -96,7 +96,7 @@ function App() {
         <button type="submit">Add Item</button>
       </form>
       <div class="data">
-        {/* <h1>{selectedGroup[0] && selectedGroup[0].id && selectedGroup[0].id}</h1> */}
+        <h1>{selectedGroup[0] && selectedGroup[0].group && selectedGroup[0].group}</h1>
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
