@@ -7,7 +7,6 @@ import GroupElement from './components/GroupElement.js';
 function App() {
 
   const [selectedGroup, setSelectedGroup] = React.useState([]);
-  const [ID, setID] = React.useState(0);
   const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
   //const colors = ["red","orange","yellow","blue","lblue","green","purple","pink"];
@@ -21,7 +20,7 @@ function App() {
       color='black',
     }={}){
     
-    this.id = ID;
+    this.id = uuidv4();
     this.name = name;
     this.xp = xp;
     this.group = GROUP;
@@ -85,7 +84,6 @@ function App() {
   }
   
   function addItem({parent, color='black'}={}){ 
-    setID(ID+1);
     const newItem = new Item({
       name : uuidv4().slice(0,4),
       parent,
@@ -97,7 +95,7 @@ function App() {
   return (
     <div className="App">
       <form className="add-form" onSubmit={handleSubmit}>
-        <input name="number" type="number" max="4" min="1" defaultValue="1" ></input>
+        <input name="number" type="number" max="3" min="1" defaultValue="1" ></input>
         <button type="submit">Add Item</button>
       </form>
       <div class="data">
