@@ -97,6 +97,7 @@ function App() {
       </form>
       <div class="data">
         <h1>{selectedGroup[0] && selectedGroup[0].group && selectedGroup[0].group}</h1>
+          <GroupData key={index} children={group} />
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
