@@ -38,10 +38,19 @@ ol{
   display: none;
 }
 
-
 .item__content.item__content_visible{
   visibility: visible;
   display: block;
+}
+
+.item-data{
+  border-bottom:1px solid black;
+  max-width: 200px;
+  margin: 2px;
+}
+
+.item-data__edit{
+  margin: 5px 0px;
 }
 
 .black{
