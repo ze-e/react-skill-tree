@@ -98,7 +98,7 @@ function App() {
       </form>
       <div class="data">
         <h1>Level : {selectedGroup[0] && selectedGroup[0].group && selectedGroup[0].group}</h1>
-          <GroupData children={GROUPS[selectedGroup[0].group]}/>
+          <GroupData children={GROUPS[selectedGroup[0]] && GROUPS[selectedGroup[0].group] && GROUPS[selectedGroup[0].group]}/>
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
