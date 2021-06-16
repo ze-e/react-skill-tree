@@ -12,8 +12,6 @@ export default class Colors{
     this.availableColors.length === 0 && this.resetColors();
     const chosenColor = this.availableColors[Math.floor(Math.random()*this.availableColors.length)];
     this.availableColors = this.availableColors.filter(i => {return i !== chosenColor});
-    console.log(`chose: ${chosenColor}`);
-    console.log(this.availableColors);
     return chosenColor;    
   }
 
