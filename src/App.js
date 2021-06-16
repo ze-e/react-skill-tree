@@ -54,11 +54,13 @@ function App() {
     const childSize = document.querySelector(".add-form").elements["number"].value;
 
     const itemsToAdd = [];
+    //create groupColor
+    const GroupColors = new Colors();
 
 
     if(GROUP === 0){
     //const color = colors[Math.floor(Math.random()*colors.length)]
-    const color = new Colors().chooseUniqueColor();
+    const color = GroupColors.chooseUniqueColor();
       for(let i = 1; i <= childSize; i++){
         const newItem = addItem({color});
         itemsToAdd.push(newItem);
@@ -69,7 +71,7 @@ function App() {
       const prevGroup = GROUPS[GROUP-1];
       prevGroup.forEach(item => {
       //const color = colors[Math.floor(Math.random()*colors.length)]
-        const color = new Colors().chooseUniqueColor();
+        const color = GroupColors.chooseUniqueColor();
         for(let i = 1; i <= childSize; i++){
           const newItem = addItem({parent:item,color});
           itemsToAdd.push(newItem);
