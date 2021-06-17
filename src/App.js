@@ -5,8 +5,10 @@ import Colors from './util/Colors';
 import GroupElement from './components/GroupElement';
 import GroupData from './components/GroupData';
 
-function App() {
+import {DataContext} from './contexts/dataContext';
 
+function App() {
+  
   const [selectedGroup, setSelectedGroup] = React.useState(0);
   const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
@@ -44,6 +46,12 @@ function App() {
       selected.classList.add('selected');
       selected.id && setSelectedGroup(selected.id);
     }
+  }
+
+  function changeName(itemId, newName){
+    setGroups(prev => {
+      prev.map(i => i.id === itemId? { ...i, name: newName }: i)
+    });
   }
   
   function insertContent(){
@@ -90,19 +98,21 @@ function App() {
 
   return (
     <div className="App">
+      <DataContext.Provider value={GROUPS}>
       <form className="add-form" onSubmit={handleSubmit}>
         <input name="number" type="number" max="3" min="1" defaultValue="1" ></input>
         <button type="submit">Add Item</button>
       </form>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData children={GROUPS[selectedGroup] && GROUPS[selectedGroup]}/>
+          <GroupData children={GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName}/>
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
           {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group} />)}
         </ol>
       </div>
+      </DataContext.Provider>
     </div>
   );
 }

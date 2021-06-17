@@ -1,6 +1,8 @@
 import React from 'react';
+//import {dataContext} from '../contexts/dataContext';
 
 function ItemData(props) {
+//  const Data = React.useContext(dataContext);
   const my = props.item;
 
   const [editing, setEditing] = React.useState(false);
@@ -10,7 +12,10 @@ function ItemData(props) {
   }
 
   function handleChangeName(e){
-    my.name = e.target.value;
+    //my.name = e.target.value;
+
+    const newName = e.target.value;
+    props.changeName(my.id, newName);
   }
 
   return(
