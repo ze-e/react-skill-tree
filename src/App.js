@@ -99,8 +99,7 @@ function App() {
     const color = new Colors().chooseUniqueColor();
     const newItem = addItem({color, group});
     //add item to group
-    const thisGroup = newValue[group];
-    thisGroup.push(newItem);
+    group && newValue[group].push(newItem);
     //update groups
     setGroups(newValue);
   }
