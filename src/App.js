@@ -5,8 +5,6 @@ import Colors from './util/Colors';
 import GroupElement from './components/GroupElement';
 import GroupData from './components/GroupData';
 
-import {DataContext} from './contexts/dataContext';
-
 function App() {
   
   const [selectedGroup, setSelectedGroup] = React.useState(0);
@@ -113,21 +111,15 @@ function App() {
 
   return (
     <div className="App">
-      <DataContext.Provider value={GROUPS}>
-      <form className="add-form" onSubmit={handleSubmit}>
-        <input name="number" type="number" max="3" min="1" defaultValue="1" ></input>
-        <button type="submit">Add Item</button>
-      </form>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
           <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson}/>
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
-          {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group} />)}
+          {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group}/>)}
         </ol>
       </div>
-      </DataContext.Provider>
     </div>
   );
 }
