@@ -98,7 +98,7 @@ function App() {
         <button type="submit">Add Item</button>
       </form>
       <div class="data">
-        <h1>{selectedGroup[0] && `Level : ${selectedGroup[0].group}`}</h1>
+        <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
           <GroupData children={GROUPS[selectedGroup] && GROUPS[selectedGroup]}/>
       </div>
       <div className="timeline">
