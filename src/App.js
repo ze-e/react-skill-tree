@@ -110,7 +110,7 @@ function App() {
     const itemsToAdd = [];
     const GroupColors = new Colors();
     const color = GroupColors.chooseUniqueColor();
-    const newItem = addItem({group, color});
+    const newItem = addItem({group:GROUP, color});
     itemsToAdd.push(newItem);
     setGroups([...GROUPS, itemsToAdd]);
   }
