@@ -93,10 +93,23 @@ function App() {
     const newItem = new Item({
       name : uuidv4().slice(0,4),
       parent,
-      color,    
+      color,
+      group,    
     });
     return newItem;
    }
+
+  function addLesson(group){
+    const newValue = [...GROUPS];
+    //create new item
+    const color = new Colors().chooseUniqueColor();
+    const newItem = addItem({color, group});
+    //add item to group
+    const thisGroup = newValue[group];
+    thisGroup.push(newItem);
+    //update groups
+    setGroups(newValue);
+  }
 
   return (
     <div className="App">
@@ -107,7 +120,7 @@ function App() {
       </form>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName}/>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson}/>
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
