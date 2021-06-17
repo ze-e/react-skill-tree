@@ -51,7 +51,7 @@ function App() {
   function changeName(item, newName){
     const newValue = [...GROUPS];
     newValue.forEach(group => {
-      group.forEach(i => i.id == item.id ? i.name = newName : i.name = i.name)
+      group.forEach(i => i.id === item.id ? i.name = newName : i.name = i.name)
     });
     setGroups(newValue);
   }
@@ -89,7 +89,7 @@ function App() {
     setGroups([...GROUPS, itemsToAdd]);
   }
   
-  function addItem({parent, color='black'}={}){ 
+  function addItem({parent, color='black', group}={}){ 
     const newItem = new Item({
       name : uuidv4().slice(0,4),
       parent,
