@@ -87,13 +87,9 @@ function App() {
     setGroups([...GROUPS, itemsToAdd]);
   }
   
-  function addItem({parent, color='black', group}={}){ 
-    const newItem = new Item({
-      name : uuidv4().slice(0,4),
-      parent,
-      color,
-      group,    
-    });
+  function addItem({name=uuidv4().slice(0,4), parent, color='black', group}={}){ 
+    const newItem = new Item({name, parent, color, group});
+    group && GROUPS[group - 1] && GROUPS[group - 1].forEach(item => item.children.push(newItem));    
     return newItem;
    }
 
@@ -109,6 +105,18 @@ function App() {
     setGroups(newValue);
   }
 
+  function handleAddGroup(){
+    setGroup(GROUP + 1);
+    const itemsToAdd = [];
+
+    const GroupColors = new Colors();
+    const color = GroupColors.chooseUniqueColor();
+    const newItem = addItem({group, color});
+    itemsToAdd.push(newItem);
+
+    setGroups([...GROUPS, itemsToAdd]);
+  }
+
   return (
     <div className="App">
       <div class="data">
@@ -120,6 +128,7 @@ function App() {
           {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group}/>)}
         </ol>
       </div>
+      <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
   );
 }
