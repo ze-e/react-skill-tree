@@ -7,7 +7,6 @@ import GroupData from './components/GroupData';
 
 function App() {
 
-//  const [selectedGroup, setSelectedGroup] = React.useState([]);
   const [selectedGroup, setSelectedGroup] = React.useState(0);
   const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
@@ -43,8 +42,6 @@ function App() {
 
     if(selected && selected != null){
       selected.classList.add('selected');
-      //const group = selected.id;
-      //group && setSelectedGroup(GROUPS[group]);
       selected.id && setSelectedGroup(selected.id);
     }
   }
