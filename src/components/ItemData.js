@@ -15,7 +15,7 @@ function ItemData(props) {
     //my.name = e.target.value;
 
     const newName = e.target.value;
-    props.changeName(my.id, newName);
+    props.changeName(props.item, newName);
   }
 
   return(

@@ -48,10 +48,12 @@ function App() {
     }
   }
 
-  function changeName(itemId, newName){
-    setGroups(prev => {
-      prev.map(i => i.id === itemId? { ...i, name: newName }: i)
+  function changeName(item, newName){
+    const newValue = [...GROUPS];
+    newValue.forEach(group => {
+      group.forEach(i => i.id == item.id ? i.name = newName : i.name = i.name)
     });
+    setGroups(newValue);
   }
   
   function insertContent(){
@@ -105,11 +107,11 @@ function App() {
       </form>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData children={GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName}/>
+          <GroupData children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName}/>
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
-          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group} />)}
+          {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group} />)}
         </ol>
       </div>
       </DataContext.Provider>
