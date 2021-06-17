@@ -7,10 +7,10 @@ import GroupData from './components/GroupData';
 
 function App() {
 
-  const [selectedGroup, setSelectedGroup] = React.useState([]);
+//  const [selectedGroup, setSelectedGroup] = React.useState([]);
+  const [selectedGroup, setSelectedGroup] = React.useState(0);
   const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
-  //const colors = ["red","orange","yellow","blue","lblue","green","purple","pink"];
 
   class Item {
     constructor({
@@ -43,8 +43,9 @@ function App() {
 
     if(selected && selected != null){
       selected.classList.add('selected');
-      const group = selected.id;
-      group && setSelectedGroup(GROUPS[group]);
+      //const group = selected.id;
+      //group && setSelectedGroup(GROUPS[group]);
+      selected.id && setSelectedGroup(selected.id);
     }
   }
   
@@ -97,12 +98,12 @@ function App() {
         <button type="submit">Add Item</button>
       </form>
       <div class="data">
-        <h1>Level : {selectedGroup[0] && selectedGroup[0].group && selectedGroup[0].group}</h1>
-          <GroupData children={GROUPS[selectedGroup[0]] && GROUPS[selectedGroup[0].group] && GROUPS[selectedGroup[0].group]}/>
+        <h1>{selectedGroup[0] && `Level : ${selectedGroup[0].group}`}</h1>
+          <GroupData children={GROUPS[selectedGroup] && GROUPS[selectedGroup]}/>
       </div>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
-          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={group === selectedGroup && true} children={group} />)}
+          {GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group} />)}
         </ol>
       </div>
     </div>
