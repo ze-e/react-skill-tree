@@ -89,6 +89,7 @@ function App() {
   
   function addItem({name=uuidv4().slice(0,4), parent, color='black', group}={}){ 
     const newItem = new Item({name, parent, color, group});
+    newItem.color = newItem.parent ? parent.color : color;
     group && GROUPS[group - 1] && GROUPS[group - 1].forEach(item => item.children.push(newItem));    
     return newItem;
    }
@@ -99,7 +100,7 @@ function App() {
     const color = new Colors().chooseUniqueColor();
     const newItem = addItem({color, group});
     //add item to group
-    group && newValue[group].push(newItem);
+    group && newValue[group] && newValue[group].push(newItem);
     //update groups
     setGroups(newValue);
   }
