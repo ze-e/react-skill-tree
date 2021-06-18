@@ -96,6 +96,7 @@ function App() {
 
   function addLesson(group){
     const newValue = [...GROUPS];
+    console.log(`newval: ${newValue} group: ${group}`);
     //create new item
     const color = new Colors().chooseUniqueColor();
     const newItem = addItem({color, group});
