@@ -29,11 +29,6 @@ function App() {
     this.color = color;
     }
   }
-  
-  function handleSubmit(e){
-    e.preventDefault();
-    insertContent();
-  }
 
   function handleClick(e){
     const oldSelected = document.querySelector('.selected');
@@ -54,38 +49,6 @@ function App() {
     setGroups(newValue);
   }
   
-  function insertContent(){
-
-    setGroup(GROUP + 1);
-    const childSize = document.querySelector(".add-form").elements["number"].value;
-    const itemsToAdd = [];
-
-    //create groupColor
-    const GroupColors = new Colors();
-
-    if(GROUP === 0){
-    const color = GroupColors.chooseUniqueColor();
-      for(let i = 1; i <= childSize; i++){
-        const newItem = addItem({color});
-        itemsToAdd.push(newItem);
-    }
-  }
-
-    if(GROUP > 0){
-      const prevGroup = GROUPS[GROUP-1];
-      prevGroup.forEach(item => {
-      const color = GroupColors.chooseUniqueColor();
-        for(let i = 1; i <= childSize; i++){
-          const newItem = addItem({parent:item,color});
-          itemsToAdd.push(newItem);
-          item.children.push(newItem);
-        }
-      });
-
-    }
-
-    setGroups([...GROUPS, itemsToAdd]);
-  }
   
   function addItem({name=uuidv4().slice(0,4), parent, color='black', group}={}){ 
     const newItem = new Item({name, parent, color, group});
@@ -101,7 +64,7 @@ function App() {
     const color = new Colors().chooseUniqueColor();
     const newItem = addItem({color, group});
     //add item to group
-    group && newValue[group] && newValue[group].push(newItem);
+    newValue[group] && newValue[group].push(newItem);
     //update groups
     setGroups(newValue);
   }

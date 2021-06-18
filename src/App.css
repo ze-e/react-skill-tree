@@ -48,6 +48,10 @@ ol{
   margin: 2px;
 }
 
+.item-data.selected{
+  background-color: lightgray;
+}
+
 .item-data__edit{
   margin: 5px 0px;
 }
