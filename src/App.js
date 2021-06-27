@@ -7,7 +7,7 @@ import GroupData from './components/GroupData';
 
 function App() {
   
-  const [selectedGroup, setSelectedGroup] = React.useState(0);
+  const [selectedGroup, setSelectedGroup] = React.useState();
   const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
 
@@ -23,7 +23,7 @@ function App() {
     this.id = uuidv4();
     this.name = name;
     this.xp = xp;
-    this.group = GROUP;
+    this.group = selectedGroup || 0;
     this.parent = parent;
     this.children = children;
     this.color = color;
@@ -59,7 +59,6 @@ function App() {
 
   function addLesson(group){
     const newValue = [...GROUPS];
-    console.log(`newval: ${newValue} group: ${group}`);
     //create new item
     const color = new Colors().chooseUniqueColor();
     const newItem = addItem({color, group});
@@ -70,7 +69,7 @@ function App() {
   }
 
   function handleAddGroup(){
-    setGroup(GROUP + 1);
+    setGroup(GROUPS.length + 1);
     const itemsToAdd = [];
     const GroupColors = new Colors();
     const color = GroupColors.chooseUniqueColor();
@@ -81,14 +80,14 @@ function App() {
 
   return (
     <div className="App">
-      <div class="data">
-        <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson}/>
-      </div>
-      <div className="timeline">
+            <div className="timeline">
         <ol className="column" onClick={handleClick}>
           {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group}/>)}
         </ol>
+      </div>
+      <div class="data">
+        <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson}/>
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
