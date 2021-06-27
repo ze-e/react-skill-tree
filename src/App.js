@@ -8,7 +8,7 @@ import GroupData from './components/GroupData';
 function App() {
   
   const [selectedGroup, setSelectedGroup] = React.useState();
-  const [GROUP, setGroup] = React.useState(0);
+  //const [GROUP, setGroup] = React.useState(0);
   const [GROUPS, setGroups] = React.useState([]);
 
   class Item {
@@ -69,11 +69,11 @@ function App() {
   }
 
   function handleAddGroup(){
-    setGroup(GROUPS.length + 1);
+    //setGroup(GROUPS.length + 1);
     const itemsToAdd = [];
     const GroupColors = new Colors();
     const color = GroupColors.chooseUniqueColor();
-    const newItem = addItem({group:GROUP, color});
+    const newItem = addItem({group:GROUPS.length + 1, color});
     itemsToAdd.push(newItem);
     setGroups([...GROUPS, itemsToAdd]);
   }
