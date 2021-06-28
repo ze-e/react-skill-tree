@@ -1,0 +1,93 @@
+.timeline{
+  overflow-x: scroll;
+  max-width: 100vw;
+}
+
+ol{
+  padding-inline-start: 0px;
+}
+
+.column{
+  list-style: none;
+  display: flex;
+}
+
+.item.selected{
+  background-color: lightgray;
+}
+
+.item{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.item__content{
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.item__content.item__content_invisible{
+  visibility:hidden;
+  display: none;
+}
+
+.item__content.item__content_visible{
+  visibility: visible;
+  display: block;
+}
+
+.item-data{
+  border-bottom:1px solid black;
+  max-width: 200px;
+  margin: 2px;
+}
+
+.item-data.selected{
+  background-color: lightgray;
+}
+
+.item-data__edit{
+  margin: 5px 0px;
+}
+
+.black{
+  border: 1px solid black;
+}
+
+.red{
+  border: 1px solid red;
+}
+
+.orange{
+  border: 1px solid orange;
+}
+
+.yellow{
+  border: 1px solid #ebe834 ;
+}
+
+.blue{
+  border: 1px solid blue;
+}
+
+.lblue{
+  border: 1px solid lightblue;
+}
+
+.green{
+  border: 1px solid green;
+}
+
+.purple{
+  border: 1px solid purple;
+}
+
+.pink{
+  border: 1px solid pink;
+}
