@@ -8,7 +8,7 @@ import GroupData from './components/GroupData';
 function App() {
   
   const [selectedGroup, setSelectedGroup] = React.useState();
-  const GROUPS = [];
+  let GROUPS = [];
 
   class Item {
     constructor({
