@@ -12,19 +12,20 @@ function App() {
 
   class Item {
     constructor({
-      name="new item",
+      name="New lesson",
       group = selectedGroup || 0,
       xp=10,
-      parent,
+      parents=[],
       children=[],
       color='black',
     }={}){
     
     this.id = uuidv4();
-    this.name = name;
+    // this.name = name;
+    this.name = this.id.slice(0,5);
     this.xp = xp;
     this.group = group;
-    this.parent = parent;
+    this.parents = parents;
     this.children = children;
     this.color = color;
     }
@@ -50,22 +51,22 @@ function App() {
   }
   
   
-  function addItem({name=uuidv4().slice(0,4), parent, color='black', group}={}){ 
-    const newItem = new Item({name, parent, color, group});
-    newItem.color = newItem.parent ? parent.color : color;
-    group && GROUPS[group - 1] && GROUPS[group - 1].forEach(item => item.children.push(newItem));    
+  function addItem({parent, color='black', group}={}){ 
+    const newItem = new Item({color, group});
+    newItem.color = parent ? parent.color : color;
     return newItem;
    }
 
   function addLesson(group){
-    const newValue = [...GROUPS];
+    const newGroups = [...GROUPS];
     //create new item
     const color = new Colors().chooseUniqueColor();
     const newItem = addItem({color, group});
     //add item to group
-    newValue[group] && newValue[group].push(newItem);
+    newGroups[group] && newGroups[group].push(newItem);
     //update groups
-    setGroups(newValue);
+    setGroups(newGroups);
+    addChildToParents({child:newItem, group});
   }
 
   function handleAddGroup(){
@@ -77,6 +78,35 @@ function App() {
     setGroups([...GROUPS, itemsToAdd]);
   }
 
+  function createChild(parent){
+    const itemsToAdd = [];
+    const newItem = addItem({group:GROUPS.length, parent});
+    itemsToAdd.push(newItem);
+    setGroups([...GROUPS, itemsToAdd]);
+    addChildToParents({child:newItem, parent, group:GROUPS.length});
+  }
+
+  function addChildToParents({child, parent, group}={}){
+    const oldGroups = [...GROUPS];
+    const newGroups = [...GROUPS];
+
+    //parent specified. Lesson will only be a child of that parent
+    if(parent) {
+      const myParent = group && newGroups[group - 1] && newGroups[group - 1].find(item => item.id === parent.id);
+      myParent && myParent.children.push(child);
+      child.parents.push(myParent);
+    }
+    
+    //no parent specified. Lesson will be a child of all members of prev group
+    else{
+      group && newGroups[group - 1] && newGroups[group - 1].forEach(item => item.children.push(child));
+      child.parents.push(newGroups[group - 1]);
+    } 
+    setGroups(newGroups);
+
+  }
+
+
   return (
     <div className="App">
             <div className="timeline">
@@ -86,7 +116,7 @@ function App() {
       </div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson}/>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addChild={createChild}/>
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
