@@ -8,7 +8,7 @@ import GroupData from './components/GroupData';
 function App() {
   
   const [selectedGroup, setSelectedGroup] = React.useState();
-  let GROUPS = [];
+  const [GROUPS, setGROUPS] = React.useState([]);
 
   class Item {
     constructor({
@@ -43,9 +43,11 @@ function App() {
   }
 
   function changeName(item, newName){
-    GROUPS.forEach(group => {
+    const newGroups = [...GROUPS];
+    newGroups.forEach(group => {
       group.forEach(i => i.id === item.id ? i.name = newName : i.name = i.name)
     });
+    setGROUPS([...newGroups]);
   }
   
   
@@ -60,8 +62,10 @@ function App() {
     const color = new Colors().chooseUniqueColor();
     const newItem = addItem({color, group});
     //add item to group
-    GROUPS[group] && GROUPS[group].push(newItem);
+    const newGroups = [...GROUPS];
+    newGroups[group] && newGroups[group].push(newItem);
     //update groups
+    setGROUPS([...newGroups])
     addChildToParents({child:newItem, group});
   }
 
@@ -71,33 +75,33 @@ function App() {
     const color = GroupColors.chooseUniqueColor();
     const newItem = addItem({group:GROUPS.length, color});
     itemsToAdd.push(newItem);
-    GROUPS = [...GROUPS, itemsToAdd];
+    setGROUPS([...GROUPS, itemsToAdd]);
   }
 
   function createChild(parent){
     const itemsToAdd = [];
     const newItem = addItem({group:GROUPS.length, parent});
     itemsToAdd.push(newItem);
-    GROUPS = [...GROUPS, itemsToAdd];
+    setGROUPS([...GROUPS, itemsToAdd]);
     addChildToParents({child:newItem, parent, group:GROUPS.length});
   }
 
   function addChildToParents({child, parent, group}={}){
 
+    const newGroups = [];
     //parent specified. Lesson will only be a child of that parent
     if(parent) {
-      const myParent = group && GROUPS[group - 1] && GROUPS[group - 1].find(item => item.id === parent.id);
+      const myParent = group && newGroups[group - 1] && newGroups[group - 1].find(item => item.id === parent.id);
       myParent && myParent.children.push(child);
       child.parents.push(myParent);
     }
     
     //no parent specified. Lesson will be a child of all members of prev group
     else{
-      group && GROUPS[group - 1] && GROUPS[group - 1].forEach(item => item.children.push(child));
-      child.parents.push(GROUPS[group - 1]);
+      group && newGroups[group - 1] && newGroups[group - 1].forEach(item => item.children.push(child));
+      child.parents.push(newGroups[group - 1]);
     } 
   }
-
 
   return (
     <div className="App">
