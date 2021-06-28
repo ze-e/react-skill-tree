@@ -88,13 +88,13 @@ function App() {
     
     if(newItem.group > 0){ 
       //update parent
-      const myParent = newGroups[newItem.group - 1].find(item => item.id === parent.id);
-      myParent.children.push(newItem);
+      const prevGroup = newGroups[newItem.group-1];
+      const myParent = prevGroup.find(item => item.id === parent.id);
+      myParent && myParent.children.push(newItem);
     }
-    
+
     //update groups
     setGROUPS([...newGroups]);
-    console.log(GROUPS);
   }
 
   function addChildToParent(parent, child, newGroups=[...GROUPS]){
