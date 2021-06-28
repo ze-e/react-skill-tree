@@ -53,6 +53,7 @@ function App() {
   
   function addItem({parent, color='black', group}={}){ 
     const newItem = new Item({color, group});
+    parent && newItem.parents.push(parent);
     newItem.color = parent ? parent.color : color;
     return newItem;
    }
@@ -66,7 +67,6 @@ function App() {
     newGroups[group] && newGroups[group].push(newItem);
     //update groups
     setGROUPS([...newGroups])
-    addChildToParents({child:newItem, group});
   }
 
   function handleAddGroup(){
@@ -79,11 +79,31 @@ function App() {
   }
 
   function createChild(parent){
+    const newGroups = [...GROUPS];
     const itemsToAdd = [];
     const newItem = addItem({group:GROUPS.length, parent});
+    //add item to groups
     itemsToAdd.push(newItem);
-    setGROUPS([...GROUPS, itemsToAdd]);
-    addChildToParents({child:newItem, parent, group:GROUPS.length});
+    newGroups.push(newItem);
+    
+    if(newItem.group > 0){ 
+      //update parent
+      const myParent = newGroups[newItem.group - 1].find(item => item.id === parent.id);
+      myParent.children.push(newItem);
+    }
+    
+    //update groups
+    setGROUPS([...newGroups]);
+    console.log(GROUPS);
+  }
+
+  function addChildToParent(parent, child, newGroups=[...GROUPS]){
+    if(child.group > 0){ 
+      const myParent = newGroups[child.group - 1].find(item => item.id === parent.id);
+      myParent && myParent.children.push(child);
+      child.parents.push(myParent);
+    }
+    setGROUPS([...newGroups]);
   }
 
   function addChildToParents({child, parent, group}={}){
