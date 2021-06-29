@@ -84,11 +84,10 @@ function App() {
 
   function createChild(parent){
     const newGroups = [...GROUPS];
-    const itemsToAdd = [];
-    const newItem = addItem({group:GROUPS.length, parent});
+    const newItem = addItem({group:parent.group+1, parent});
     //add item to groups
-    itemsToAdd.push(newItem);
-    newGroups.splice(newItem.group,0,itemsToAdd);
+    const itemGroup = newGroups[newItem.group] && newGroups[newItem.group];
+    itemGroup ? itemGroup.push(newItem) : newGroups.splice(newItem.group,0,[newItem]);
     
     if(newItem.group > 0){ 
       //update parent
