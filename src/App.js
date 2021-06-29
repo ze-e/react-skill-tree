@@ -88,7 +88,7 @@ function App() {
     const newItem = addItem({group:GROUPS.length, parent});
     //add item to groups
     itemsToAdd.push(newItem);
-    newGroups.push(itemsToAdd);
+    newGroups.splice(newItem.group,0,itemsToAdd);
     
     if(newItem.group > 0){ 
       //update parent
