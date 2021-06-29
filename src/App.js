@@ -65,7 +65,7 @@ function App() {
 
   function addLesson(group){
     const newGroups = [...GROUPS];
-    if(newGroups.length < 4){
+    if(newGroups[group].length < 3){
       //create new item
       const color = new Colors().chooseUniqueColor();
       const newItem = addItem({color, group});
@@ -89,20 +89,24 @@ function App() {
 
   function createChild(parent){
     const newGroups = [...GROUPS];
-    const newItem = addItem({group:parent.group+1, parent});
-    //add item to groups
-    const itemGroup = newGroups[newItem.group] && newGroups[newItem.group];
-    itemGroup ? itemGroup.push(newItem) : newGroups.splice(newItem.group,0,[newItem]);
-    
-    if(newItem.group > 0){ 
-      //update parent
-      const prevGroup = newGroups[newItem.group-1];
-      const myParent = prevGroup.find(item => item.id === parent.id);
-      myParent && myParent.children.push(newItem);
-    }
+    if(newGroups[parent.group].length < 3){
+      const newItem = addItem({group:parent.group+1, parent});
+      //add item to groups
+      const itemGroup = newGroups[newItem.group] && newGroups[newItem.group];
+      itemGroup ? itemGroup.push(newItem) : newGroups.splice(newItem.group,0,[newItem]);
+      
+      if(newItem.group > 0){ 
+        //update parent
+        const prevGroup = newGroups[newItem.group-1];
+        const myParent = prevGroup.find(item => item.id === parent.id);
+        myParent && myParent.children.push(newItem);
+      }
 
-    //update groups
-    setGROUPS([...newGroups]);
+      //update groups
+      setGROUPS([...newGroups]);
+    }else{
+      setError('Cannot add more than 3 lessons to group');
+    }
   }
 
   function showErrorMessage(msg){
@@ -112,11 +116,11 @@ function App() {
   return (
     <div className="App">
       <div className="timeline">
-        <div className="error">{error}</div>
         <ol className="column" onClick={handleClick}>
           {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group}/>)}
         </ol>
       </div>
+      <div className="error">{error}</div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
           <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addChild={createChild}/>
