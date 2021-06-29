@@ -9,6 +9,7 @@ function App() {
   
   const [selectedGroup, setSelectedGroup] = React.useState();
   const [GROUPS, setGROUPS] = React.useState([]);
+  const [error, setError] = React.useState('');
 
   class Item {
     constructor({
@@ -63,14 +64,18 @@ function App() {
    }
 
   function addLesson(group){
-    //create new item
-    const color = new Colors().chooseUniqueColor();
-    const newItem = addItem({color, group});
-    //add item to group
     const newGroups = [...GROUPS];
-    newGroups[group] && newGroups[group].push(newItem);
-    //update groups
-    setGROUPS([...newGroups])
+    if(newGroups.length < 4){
+      //create new item
+      const color = new Colors().chooseUniqueColor();
+      const newItem = addItem({color, group});
+      //add item to group
+      newGroups[group] && newGroups[group].push(newItem);
+      //update groups
+      setGROUPS([...newGroups])
+    }else{
+      setError('Cannot add more than 3 lessons to group');
+    }
   }
 
   function handleAddGroup(){
@@ -100,35 +105,14 @@ function App() {
     setGROUPS([...newGroups]);
   }
 
-  function addChildToParent(parent, child, newGroups=[...GROUPS]){
-    if(child.group > 0){ 
-      const myParent = newGroups[child.group - 1].find(item => item.id === parent.id);
-      myParent && myParent.children.push(child);
-      child.parents.push(myParent);
-    }
-    setGROUPS([...newGroups]);
-  }
-
-  function addChildToParents({child, parent, group}={}){
-
-    const newGroups = [];
-    //parent specified. Lesson will only be a child of that parent
-    if(parent) {
-      const myParent = group && newGroups[group - 1] && newGroups[group - 1].find(item => item.id === parent.id);
-      myParent && myParent.children.push(child);
-      child.parents.push(myParent);
-    }
-    
-    //no parent specified. Lesson will be a child of all members of prev group
-    else{
-      group && newGroups[group - 1] && newGroups[group - 1].forEach(item => item.children.push(child));
-      child.parents.push(newGroups[group - 1]);
-    } 
+  function showErrorMessage(msg){
+    setError(msg); 
   }
 
   return (
     <div className="App">
-            <div className="timeline">
+      <div className="timeline">
+        <div className="error">{error}</div>
         <ol className="column" onClick={handleClick}>
           {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group}/>)}
         </ol>
