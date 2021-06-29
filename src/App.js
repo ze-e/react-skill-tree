@@ -72,14 +72,14 @@ function App() {
       //add item to group
       newGroups[group] && newGroups[group].push(newItem);
       
-      /*add item to all parents*/  
+      //add item to all parents  
       if(group > 0){
         newGroups[group - 1] && newGroups[group - 1].forEach((item)=>{
           item.children.push(newItem);
           newItem.parents.push(item);
         })
       }
-      /*update groups*/
+      //update groups
       
       setGROUPS([...newGroups])
     }else{
@@ -96,14 +96,14 @@ function App() {
     const newItem = addItem({group:newGroups.length, color});
     itemsToAdd.push(newItem);
 
-    /*add item to all parents*/  
+    // add item to all parents  
     if(newItem.group > 0){
       newGroups[newItem.group - 1] && newGroups[newItem.group - 1].forEach((item)=>{
         item.children.push(newItem);
         newItem.parents.push(item);
       })
     }
-    /*update groups*/
+    //update groups
 
     setGROUPS([...newGroups, itemsToAdd]);
   }
