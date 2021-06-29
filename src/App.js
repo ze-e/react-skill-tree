@@ -31,6 +31,10 @@ function App() {
     }
   }
 
+  React.useEffect(()=>{
+    console.log(GROUPS);
+  })
+
   function handleClick(e){
     const oldSelected = document.querySelector('.selected');
     oldSelected && oldSelected != null && oldSelected.classList.remove('selected');
@@ -84,7 +88,7 @@ function App() {
     const newItem = addItem({group:GROUPS.length, parent});
     //add item to groups
     itemsToAdd.push(newItem);
-    newGroups.push(newItem);
+    newGroups.push(itemsToAdd);
     
     if(newItem.group > 0){ 
       //update parent
