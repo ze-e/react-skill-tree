@@ -71,7 +71,16 @@ function App() {
       const newItem = addItem({color, group});
       //add item to group
       newGroups[group] && newGroups[group].push(newItem);
-      //update groups
+      
+      /*add item to all parents*/  
+      if(group > 0){
+        newGroups[group - 1] && newGroups[group - 1].forEach((item)=>{
+          item.children.push(newItem);
+          newItem.parents.push(item);
+        })
+      }
+      /*update groups*/
+      
       setGROUPS([...newGroups])
     }else{
       setError('Cannot add more than 3 lessons to group');
@@ -79,12 +88,24 @@ function App() {
   }
 
   function handleAddGroup(){
+    const newGroups = [...GROUPS];
+
     const itemsToAdd = [];
     const GroupColors = new Colors();
     const color = GroupColors.chooseUniqueColor();
-    const newItem = addItem({group:GROUPS.length, color});
+    const newItem = addItem({group:newGroups.length, color});
     itemsToAdd.push(newItem);
-    setGROUPS([...GROUPS, itemsToAdd]);
+
+    /*add item to all parents*/  
+    if(newItem.group > 0){
+      newGroups[newItem.group - 1] && newGroups[newItem.group - 1].forEach((item)=>{
+        item.children.push(newItem);
+        newItem.parents.push(item);
+      })
+    }
+    /*update groups*/
+
+    setGROUPS([...newGroups, itemsToAdd]);
   }
 
   function createChild(parent){
@@ -107,10 +128,6 @@ function App() {
     }else{
       setError('Cannot add more than 3 lessons');
     }
-  }
-
-  function showErrorMessage(msg){
-    setError(msg); 
   }
 
   return (
