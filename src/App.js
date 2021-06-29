@@ -89,7 +89,7 @@ function App() {
 
   function createChild(parent){
     const newGroups = [...GROUPS];
-    if(!newGroups[parent.group+1] || newGroups[parent.group+1].length < 3){
+    if(!newGroups[parent.group+1] || parent.children.length < 3){
       const newItem = addItem({group:parent.group+1, parent});
       //add item to groups
       const itemGroup = newGroups[newItem.group] && newGroups[newItem.group];
@@ -105,7 +105,7 @@ function App() {
       //update groups
       setGROUPS([...newGroups]);
     }else{
-      setError('Cannot add more than 3 lessons to group');
+      setError('Cannot add more than 3 lessons');
     }
   }
 
