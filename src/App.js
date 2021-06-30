@@ -131,15 +131,25 @@ function App() {
   }
 
   function deleteItem(item){
-    const newGroups = [...GROUPS];
+    let newGroups = [...GROUPS];
     //remove item
     const itemToRemove = newGroups[item.group].find(i => item.id === i.id);
     newGroups[item.group].splice(itemToRemove, 1);
     //remove item from all parents and children
     //parents
-    item.group > 0 && newGroups[item.group-1].forEach((i)=> i.children.filter((child)=>child.id !== item.id));
+    item.group > 0 && newGroups[item.group-1].forEach((i)=> i.children = i.children.filter((child)=>child.id !== item.id));
     //children
-    newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents.filter((parent)=>parent.id !== item.id));
+    newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
+
+    //if there are no members in the group, move them all down to the previous group
+    if(item.group > 0 && !newGroups[item.group].length > 0){
+      console.log(newGroups[item.group].length);
+      console.log(newGroups.slice(newGroups[item.group-1]));
+      newGroups = newGroups.slice(newGroups[item.group-1]).forEach((i)=> i.group = i.group-1);
+      console.log(newGroups[item.group]? newGroups[item.group] : 'item.group not found');
+      newGroups.splice(newGroups[item.group], 1);
+    };
+    
     setGROUPS(newGroups);
   }
 
