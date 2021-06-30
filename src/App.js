@@ -44,7 +44,6 @@ function App() {
     if(selected && selected != null){
       selected.classList.add('selected');
       selected.id && setSelectedGroup(selected.id);
-      selectedGroup(selected);
     }
   }
 
