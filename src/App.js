@@ -44,6 +44,7 @@ function App() {
     if(selected && selected != null){
       selected.classList.add('selected');
       selected.id && setSelectedGroup(selected.id);
+      selectedGroup(selected);
     }
   }
 
@@ -104,7 +105,6 @@ function App() {
       })
     }
     //update groups
-
     setGROUPS([...newGroups, itemsToAdd]);
   }
 
@@ -125,9 +125,22 @@ function App() {
 
       //update groups
       setGROUPS([...newGroups]);
+
     }else{
       setError('Cannot add more than 3 lessons');
     }
+  }
+
+  function deleteItem(item){
+    const newGroups = [...GROUPS];
+    //remove item
+    const itemToRemove = newGroups[item.group].find(i => item.id === i.id);
+    newGroups[item.group].splice(itemToRemove, 1);
+    //remove item from all parents and children
+    //parents
+    item.group > 0 && newGroups[item.group-1].forEach((i)=> i.children.filter((child)=>child.id !== item.id));
+    //children
+    newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents.filter((parent)=>parent.id !== item.id));
   }
 
   return (
@@ -140,7 +153,7 @@ function App() {
       <div className="error">{error}</div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addChild={createChild}/>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addChild={createChild} deleteItem={deleteItem}/>
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
