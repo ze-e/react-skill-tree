@@ -140,6 +140,7 @@ function App() {
     item.group > 0 && newGroups[item.group-1].forEach((i)=> i.children.filter((child)=>child.id !== item.id));
     //children
     newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents.filter((parent)=>parent.id !== item.id));
+    setGROUPS(newGroups);
   }
 
   return (
