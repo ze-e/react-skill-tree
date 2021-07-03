@@ -14,7 +14,7 @@ function App() {
   class Item {
     constructor({
       name="New lesson",
-      group = selectedGroup || 0,
+      group,
       xp=10,
       parents=[],
       children=[],
@@ -30,11 +30,37 @@ function App() {
     this.children = children;
     this.color = color;
     }
+
+    moveItem(newGroup){
+      this.group = newGroup;
+    }
   }
 
   React.useEffect(()=>{
     console.log(GROUPS);
   })
+
+  function refactorGroups(){
+    const newGroups = [...GROUPS];
+    newGroups.forEach((group)=>{
+      //if there are no members in the group, move them all down to the previous group
+      if(group > 0 && group.length === 0 || isNaN(group)){
+        newGroups.slice(newGroups[group-1]).forEach((i)=> i.group = i.group-1);
+      }
+      //if any have no parents, assign all members of prev group as parents
+      if(group > 0){
+        group.forEach((j)=>{
+          if(j.parents.length === 0){
+            newGroups[group - 1].forEach((k)=>{
+                k.children.push(j);
+                j.parents.push(k);
+            })
+          }
+        })
+      }
+    })
+    setGROUPS([...newGroups]);
+  }
 
   function handleClick(e){
     const oldSelected = document.querySelector('.selected');
@@ -131,25 +157,27 @@ function App() {
   }
 
   function deleteItem(item){
-    let newGroups = [...GROUPS];
+    const newGroups = [...GROUPS];
+
     //remove item
     const itemToRemove = newGroups[item.group].find(i => item.id === i.id);
     newGroups[item.group].splice(itemToRemove, 1);
-    //remove item from all parents and children
-    //parents
-    item.group > 0 && newGroups[item.group-1].forEach((i)=> i.children = i.children.filter((child)=>child.id !== item.id));
-    //children
-    newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
-
-    //if there are no members in the group, move them all down to the previous group
-    if(item.group > 0 && !newGroups[item.group].length > 0){
-      console.log(newGroups[item.group].length);
-      console.log(newGroups.slice(newGroups[item.group-1]));
-      newGroups = newGroups.slice(newGroups[item.group-1]).forEach((i)=> i.group = i.group-1);
-      console.log(newGroups[item.group]? newGroups[item.group] : 'item.group not found');
-      newGroups.splice(newGroups[item.group], 1);
-    };
     
+    //remove item from parents
+    // item.group > 0 && newGroups[item.group-1].forEach((i)=> i.children = i.children.filter((child)=>child.id !== item.id));
+    item.parents.length > 0 && item.parents.forEach((i)=> i.children = i.children.filter((child)=>child.id !== item.id));
+
+    //remove item from children
+    // newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
+    item.children.length > 0 && item.children.forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
+
+    //reconnect parents to children
+    item.parents.length > 0 && item.children.length > 0 && item.parents.forEach((parent)=>{parent.parents.length > 0 && parent.children.push(item.children)});
+    
+    //reconnect children to parents
+    item.parents.length > 0 && item.children.length > 0 && item.children.forEach((child)=>{item.parents.length > 0 && child.parents.push(item.parents)});
+
+    //update groups
     setGROUPS(newGroups);
   }
 
