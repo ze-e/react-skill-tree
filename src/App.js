@@ -175,12 +175,19 @@ function App() {
     //remove group if item is the only item in group
     if(newGroups[item.group].length === 0) {
       newGroups.splice(item.group, 1);
+
+      newGroups.slice(newGroups[item.group].forEach((i)=>{
+        i.group--;
+      }));
+
+      console.log(item.children.length);
+
       // reconnect parents to children
-      item.parents.length > 0 && item.children.length > 0 && item.parents.forEach((parent)=>{parent.parents.length > 0 && parent.children.push(item.children)});
+      item.parents.length > 0 && item.children.length > 0 && item.parents.forEach((parent)=>{parent.children = parent.children.concat(item.children)});
       
       // reconnect children to parents
-      item.parents.length > 0 && item.children.length > 0 && item.children.forEach((child)=>{item.parents.length > 0 && child.parents.push(item.parents)});
-      }
+      item.parents.length > 0 && item.children.length > 0 && item.children.forEach((child)=>{child.parents = child.parents.concat(item.parents)});
+    }
 
     //update groups
     setGROUPS(newGroups);
