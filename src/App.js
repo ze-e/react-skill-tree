@@ -180,8 +180,6 @@ function App() {
         i.group--;
       }));
 
-      console.log(item.children.length);
-
       // reconnect parents to children
       item.parents.length > 0 && item.children.length > 0 && item.parents.forEach((parent)=>{parent.children = parent.children.concat(item.children)});
       
