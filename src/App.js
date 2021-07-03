@@ -171,11 +171,16 @@ function App() {
     // newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
     item.children.length > 0 && item.children.forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
 
-    //reconnect parents to children
-    item.parents.length > 0 && item.children.length > 0 && item.parents.forEach((parent)=>{parent.parents.length > 0 && parent.children.push(item.children)});
-    
-    //reconnect children to parents
-    item.parents.length > 0 && item.children.length > 0 && item.children.forEach((child)=>{item.parents.length > 0 && child.parents.push(item.parents)});
+
+    //remove group if item is the only item in group
+    if(newGroups[item.group].length === 0) {
+      newGroups.splice(item.group, 1);
+      // reconnect parents to children
+      item.parents.length > 0 && item.children.length > 0 && item.parents.forEach((parent)=>{parent.parents.length > 0 && parent.children.push(item.children)});
+      
+      // reconnect children to parents
+      item.parents.length > 0 && item.children.length > 0 && item.children.forEach((child)=>{item.parents.length > 0 && child.parents.push(item.parents)});
+      }
 
     //update groups
     setGROUPS(newGroups);
