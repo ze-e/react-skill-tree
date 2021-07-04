@@ -24,12 +24,17 @@ function App() {
     
     this.id = uuidv4();
     this.name = name;
-    this.xp = () =>{return skills.length};
+    // this.xp = (skills.length + 1) * 10;
+    this.xp = this.getXP();
     this.group = group;
     this.parents = parents;
     this.children = children;
     this.color = color;
     this.skills = skills;
+    }
+
+    getXP(){
+      return (this.skills.length + 1) * 10;
     }
   }
 

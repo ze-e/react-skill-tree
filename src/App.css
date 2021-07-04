@@ -64,6 +64,10 @@ ol{
   list-style: none;
 }
 
+.item-data__skills{
+  list-style: none;
+}
+
 .error{
   color:red;
 }
