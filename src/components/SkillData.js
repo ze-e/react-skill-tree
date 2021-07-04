@@ -1,3 +1,5 @@
+import React from 'react';
+
 function SkillData(props) {
   const [editing, setEditing] = React.useState(false);
 
@@ -13,7 +15,7 @@ function SkillData(props) {
 
   return(
     <li className="skill">
-      {!editing ? <h5 className='skill__name'>{props.item}</h5>:<input type="text" defaultValue={my.name} onChange={handleChangeName} onBlur={toggleEdit}></input>}
+      {!editing ? <h5 className='skill__name'>{props.item}</h5>:<input type="text" defaultValue={props.item} onChange={handleChangeName} onBlur={toggleEdit}></input>}
       <p className="skill__xp">+ 10 XP / Gold</p>
       <button className="skill__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
     </li>

@@ -15,16 +15,14 @@ function App() {
     constructor({
       name = "New Lesson",
       group,
-      xp,
       parents = [],
       children = [],
-      color = 'black',
-      skills = []
+      color = "black",
+      skills = ["New Skill"]
     }={}){
     
     this.id = uuidv4();
     this.name = name;
-    // this.xp = (skills.length + 1) * 10;
     this.xp = this.getXP();
     this.group = group;
     this.parents = parents;
@@ -34,7 +32,7 @@ function App() {
     }
 
     getXP(){
-      return (this.skills.length + 1) * 10;
+      return this.skills ? (this.skills.length + 1) * 10 : 0;
     }
   }
 
@@ -92,6 +90,10 @@ function App() {
     }else{
       setError('Cannot add more than 3 lessons to group');
     }
+  }
+
+  function addSkill(item){
+    item.skills.push("New Skill");
   }
 
   function handleAddGroup(){
@@ -185,7 +187,7 @@ function App() {
       <div className="error">{error}</div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addChild={createChild} deleteItem={deleteItem}/>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addSkill={addSkill} addChild={createChild} deleteItem={deleteItem}/>
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
