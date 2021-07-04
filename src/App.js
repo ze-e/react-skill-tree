@@ -66,8 +66,8 @@ function App() {
 
   function changeSkill(newName, index, parent){
     const newGroups = [...GROUPS];
-    const oldName = newGroups[parent.group] && newGroups[parent.group].find((i)=>{i.id===parent.id}).skills[index];
-    oldname = newName;
+    const skillsArray = newGroups[parent.group] && newGroups[parent.group].find( i => i.id === parent.id).skills;
+    skillsArray[index] = newName;
     setGROUPS([newGroups]);
   }
   
