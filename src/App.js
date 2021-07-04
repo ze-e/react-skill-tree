@@ -68,7 +68,7 @@ function App() {
     const newGroups = [...GROUPS];
     const skillsArray = newGroups[parent.group] && newGroups[parent.group].find( i => i.id === parent.id).skills;
     skillsArray[index] = newName;
-    setGROUPS([newGroups]);
+    setGROUPS([...newGroups]);
   }
   
   function addItem({parent, color='black', group}={}){ 

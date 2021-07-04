@@ -9,7 +9,7 @@ function SkillData(props) {
 
   function handleChangeName(e){
     const newName = e.target.value;
-    props.changeSkill(props.newName, props.index, props.parent);
+    props.changeSkill(newName, props.index, props.parent);
   }
 
   return(
