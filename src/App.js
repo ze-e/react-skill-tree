@@ -112,7 +112,7 @@ function App() {
   function addSkill(item){
     const newGroups = [...GROUPS];
     const newItem = newGroups[item.group].find(i =>(i.id === item.id));
-    newItem && newItem.addSkill("New Skill");
+    newItem && newItem.addSkill(`Skill ${newItem.skills && newItem.skills.length + 1}`);
     setGROUPS([...newGroups]);
   }
 
