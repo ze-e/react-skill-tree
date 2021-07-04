@@ -13,54 +13,27 @@ function App() {
 
   class Item {
     constructor({
-      name="New lesson",
+      name = "New Lesson",
       group,
       xp=10,
       parents=[],
       children=[],
-      color='black',
+      color = 'black',
     }={}){
     
     this.id = uuidv4();
-    // this.name = name;
-    this.name = this.id.slice(0,5);
+    this.name = name;
     this.xp = xp;
     this.group = group;
     this.parents = parents;
     this.children = children;
     this.color = color;
     }
-
-    moveItem(newGroup){
-      this.group = newGroup;
-    }
   }
 
   React.useEffect(()=>{
     console.log(GROUPS);
   })
-
-  function refactorGroups(){
-    const newGroups = [...GROUPS];
-    newGroups.forEach((group)=>{
-      //if there are no members in the group, move them all down to the previous group
-      if(group > 0 && group.length === 0 || isNaN(group)){
-        newGroups.slice(newGroups[group-1]).forEach((i)=> i.group = i.group-1);
-      }
-      //if any have no parents, assign all members of prev group as parents
-      if(group > 0){
-        group.forEach((j)=>{
-          if(j.parents.length === 0){
-            newGroups[group - 1].forEach((k)=>{
-                k.children.push(j);
-                j.parents.push(k);
-            })
-          }
-        })
-      }
-    })
-    setGROUPS([...newGroups]);
-  }
 
   function handleClick(e){
     const oldSelected = document.querySelector('.selected');
@@ -80,7 +53,6 @@ function App() {
     });
     setGROUPS([...newGroups]);
   }
-  
   
   function addItem({parent, color='black', group}={}){ 
     const newItem = new Item({color, group});
@@ -106,8 +78,10 @@ function App() {
         })
       }
       //update groups
-      
-      setGROUPS([...newGroups])
+      setGROUPS([...newGroups]);
+
+      //remove errors
+      setError('');
     }else{
       setError('Cannot add more than 3 lessons to group');
     }
@@ -150,6 +124,9 @@ function App() {
 
       //update groups
       setGROUPS([...newGroups]);
+
+      //remove errors
+      setError('');
 
     }else{
       setError('Cannot add more than 3 lessons');
