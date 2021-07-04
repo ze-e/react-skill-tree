@@ -31,6 +31,7 @@ function ItemData(props) {
   }
 
   function handleChangeParents(e){
+    console.log(e.target.value);
     props.changeParents(props.item, e.target.value);
   }
 
@@ -52,11 +53,11 @@ function ItemData(props) {
         {my.skills && my.skills.length > 0 &&  my.skills.map((skill, index) => <SkillData key={index} index={index} item={skill} parent={props.item} addSkill={props.addSkill} changeSkill={props.changeSkill} deleteSkill={props.deleteSkill} changeName={props.changeName}/>)}
       </ol>
       
-      { my.parents.length > 0 &&     
+      { editing && DATA[my.group-1] && DATA[my.group-1].length > 0 &&     
       <> 
         <label for="item-data__parentList">Change prerequisites:</label>
         <select name="parents" id="parents" multiple onChange={handleChangeParents}>
-          {DATA[my.group].map((parent) => <option value={parent.id}>{parent.name}</option>)}
+          {DATA[my.group-1].map((parent) => <option value={parent.id}>{parent.name}</option>)}
         </select>
       </>
       }

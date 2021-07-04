@@ -48,9 +48,9 @@ function App() {
     }
   }
 
-  React.useEffect(()=>{
-    console.log(GROUPS);
-  })
+  // React.useEffect(()=>{
+  //   console.log(GROUPS);
+  // })
 
   function handleClick(e){
     const oldSelected = document.querySelector('.selected');
@@ -201,7 +201,7 @@ function App() {
     if(newGroups[item.group].length === 0) {
       newGroups.splice(item.group, 1);
 
-      newGroups.slice(newGroups[item.group].forEach((i)=>{
+      newGroups[item.group] && newGroups.slice(newGroups[item.group].forEach((i)=>{
         i.group--;
       }));
 
