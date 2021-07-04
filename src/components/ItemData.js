@@ -44,6 +44,16 @@ function ItemData(props) {
       <ol className="item-data__skills">
         {my.skills && my.skills.length > 0 &&  my.skills.map((skill, index) => <SkillData key={index} index={index} item={skill} parent={props.item} addSkill={props.addSkill} changeSkill={props.changeSkill} changeName={props.changeName}/>)}
       </ol>
+      
+      { my.parents.length > 0 &&     
+      <> 
+      <label for="item-data__parentList">Change prerequisites:</label>
+      <select name="parents" id="parents" multiple>
+      {my.parents.map((parent) => <option value={parent.id}>{parent.name}</option>)}
+      </select>
+      </>
+      }
+      
       <ol className="item-data__parents">
         {my.parents.length > 0 && 'Complete any of these to move to the next lesson:'}
         {my.parents.length > 0 &&  my.parents.map((parent, index) => <li key={index}>{parent && parent.name && parent.name}</li>)}
