@@ -63,6 +63,13 @@ function App() {
     });
     setGROUPS([...newGroups]);
   }
+
+  function changeSkill(newName, index, parent){
+    const newGroups = [...GROUPS];
+    const oldName = newGroups[parent.group] && newGroups[parent.group].find((i)=>{i.id===parent.id}).skills[index];
+    oldname = newName;
+    setGROUPS([newGroups]);
+  }
   
   function addItem({parent, color='black', group}={}){ 
     const newItem = new Item({color, group});
@@ -195,7 +202,7 @@ function App() {
       <div className="error">{error}</div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addSkill={addSkill} addChild={createChild} deleteItem={deleteItem}/>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addSkill={addSkill} changeSkill={changeSkill} addChild={createChild} deleteItem={deleteItem}/>
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
