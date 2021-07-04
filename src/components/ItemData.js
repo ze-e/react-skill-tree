@@ -20,7 +20,7 @@ function ItemData(props) {
   }
 
   function handleAddSkill(){
-    props.addSkill(props.item);
+    my.addSkill("New Skill");
   }
 
   function handleAddChild(){
