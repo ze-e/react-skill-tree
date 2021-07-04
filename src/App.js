@@ -32,7 +32,12 @@ function App() {
     }
 
     getXP(){
-      return this.skills ? (this.skills.length + 1) * 10 : 0;
+      return this.skills && this.skills.length > 0 ? this.skills.length * 10 : 10;
+    }
+    
+    addSkill(newSkill){
+      this.skills.push(newSkill);
+      this.xp = this.getXP();
     }
   }
 
@@ -95,7 +100,7 @@ function App() {
   function addSkill(item){
     const newGroups = [...GROUPS];
     const newItem = newGroups[item.group].find(i =>(i.id === item.id));
-    newItem && newItem.push("New Skill");
+    newItem && newItem.addSkill("New Skill");
     setGROUPS([...newGroups]);
   }
 
