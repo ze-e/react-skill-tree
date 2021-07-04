@@ -252,7 +252,7 @@ function App() {
             deleteItem={deleteItem}
           />
       </div>
-      {/* <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button> */}
+      <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
   );
 }
