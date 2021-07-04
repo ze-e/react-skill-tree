@@ -42,7 +42,7 @@ function ItemData(props) {
       <button className="item-data__add-skill" type="button" onClick={handleAddSkill}>Add Skill</button>
       <button className="item-data__add-lesson" type="button" onClick={handleAddLesson}>Add More Lessons</button>
       <ol className="item-data__skills">
-        {my.skills && my.skills.length > 0 &&  my.skills.map((skill, index) => <SkillData key={index} index={index} item={skill} parent={props.item} addSkill={props.addSkill} changeSkill={props.changeSkill} changeName={props.changeName}/>)}
+        {my.skills && my.skills.length > 0 &&  my.skills.map((skill, index) => <SkillData key={index} index={index} item={skill} parent={props.item} addSkill={props.addSkill} changeSkill={props.changeSkill} deleteSkill={props.deleteSkill} changeName={props.changeName}/>)}
       </ol>
       
       { my.parents.length > 0 &&     

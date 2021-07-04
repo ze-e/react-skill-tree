@@ -12,11 +12,17 @@ function SkillData(props) {
     props.changeSkill(newName, props.index, props.parent);
   }
 
+  function handleDelete(){
+    props.deleteSkill(props.item);
+  }
+
   return(
     <li className="skill">
       {!editing ? <h5 className='skill__name'>{props.item}</h5>:<input type="text" defaultValue={props.item} onChange={handleChangeName} onBlur={toggleEdit}></input>}
       <p className="skill__xp">+ 10 XP / Gold</p>
       <button className="skill__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
+      <button className="skill__delete" type="button" onClick={handleDelete}>Delete</button>
+
     </li>
   )
 }

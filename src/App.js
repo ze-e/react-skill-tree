@@ -39,6 +39,11 @@ function App() {
       this.skills.push(newSkill);
       this.xp = this.getXP();
     }
+
+    deleteSkill(skill){
+      this.skills.splice(this.skills.indexOf(skill),1);
+      this.xp = this.getXP();
+    }
   }
 
   React.useEffect(()=>{
@@ -108,6 +113,13 @@ function App() {
     const newGroups = [...GROUPS];
     const newItem = newGroups[item.group].find(i =>(i.id === item.id));
     newItem && newItem.addSkill("New Skill");
+    setGROUPS([...newGroups]);
+  }
+
+  function deleteSkill(item){
+    const newGroups = [...GROUPS];
+    const newItem = newGroups[item.group].find(i =>(i.id === item.id));
+    newItem && newItem.deleteSkill("New Skill");
     setGROUPS([...newGroups]);
   }
 
@@ -202,7 +214,7 @@ function App() {
       <div className="error">{error}</div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addSkill={addSkill} changeSkill={changeSkill} addChild={createChild} deleteItem={deleteItem}/>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addSkill={addSkill} changeSkill={changeSkill} deleteSkill={deleteSkill} addChild={createChild} deleteItem={deleteItem}/>
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
