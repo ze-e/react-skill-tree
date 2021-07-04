@@ -15,19 +15,21 @@ function App() {
     constructor({
       name = "New Lesson",
       group,
-      xp=10,
-      parents=[],
-      children=[],
+      xp,
+      parents = [],
+      children = [],
       color = 'black',
+      skills = []
     }={}){
     
     this.id = uuidv4();
     this.name = name;
-    this.xp = xp;
+    this.xp = () =>{return skills.length};
     this.group = group;
     this.parents = parents;
     this.children = children;
     this.color = color;
+    this.skills = skills;
     }
   }
 

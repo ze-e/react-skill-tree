@@ -35,7 +35,14 @@ function ItemData(props) {
       <button className="item-data__delete" type="button" onClick={handleDelete}>Delete</button>
       <button className="item-data__add-child" type="button" onClick={handleAddChild}>Next Lesson</button>
       <button className="item-data__add-skill" type="button" onClick={handleAddLesson}>Add More Lessons</button>
-
+      <ol className="item-data___parents">
+        {my.parents.length > 0 && 'Complete any of these to move to the next lesson:'}
+        {my.parents.length > 0 &&  my.parents.map((parent, index) => <li key={index}>{parent && parent.name && parent.name}</li>)}
+      </ol>
+      <ol className="item-data___children">
+        {my.children.length > 0 && 'Complete me to move on to these lessons:'}
+        {my.children.length > 0 && my.children.map((child, index) => <li key={index}>{child && child.name && child.name}</li>)}
+      </ol>
     </li>
   )
 }

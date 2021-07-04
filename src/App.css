@@ -56,6 +56,14 @@ ol{
   margin: 5px 0px;
 }
 
+.item-data__parents{
+  list-style: none;
+}
+
+.item-data__children{
+  list-style: none;
+}
+
 .error{
   color:red;
 }
