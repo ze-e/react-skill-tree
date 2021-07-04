@@ -6,7 +6,7 @@ function ItemElement(props) {
     <li className={`item__content ${my.color} ${props.visible === true ? 'item__content_visible' : 'item__content_invisible'}`}>
       <div className="item__name">{my.name}</div>
       <ol className="item__skills" id={props.id}>
-        {props.skills > 0 && props.skills.map((skill) => <SkillElement key={child.id} item={skill}/>)}
+        {props.skills > 0 && props.skills.map((skill) => <SkillElement key={skill.id} item={skill}/>)}
       </ol>
     </li>
   )
