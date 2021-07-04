@@ -5,6 +5,8 @@ import Colors from './util/Colors';
 import GroupElement from './components/GroupElement';
 import GroupData from './components/GroupData';
 
+import {DataContext} from './contexts/dataContext';
+
 function App() {
   
   const [selectedGroup, setSelectedGroup] = React.useState();
@@ -225,6 +227,7 @@ function App() {
 
   return (
     <div className="App">
+      <DataContext.Provider value={GROUPS}>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
           {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => 
@@ -253,6 +256,7 @@ function App() {
           />
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
+    </DataContext.Provider>
     </div>
   );
 }

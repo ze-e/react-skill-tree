@@ -1,7 +1,10 @@
 import React from 'react';
 import SkillData from './SkillData';
+import {DataContext} from '../contexts/dataContext';
+
 
 function ItemData(props) {
+  const DATA = React.useContext(DataContext);
   const my = props.item;
 
   const [editing, setEditing] = React.useState(false);
@@ -53,7 +56,7 @@ function ItemData(props) {
       <> 
         <label for="item-data__parentList">Change prerequisites:</label>
         <select name="parents" id="parents" multiple onChange={handleChangeParents}>
-          {my.parents.map((parent) => <option value={parent.id}>{parent.name}</option>)}
+          {DATA[my.group].map((parent) => <option value={parent.id}>{parent.name}</option>)}
         </select>
       </>
       }
