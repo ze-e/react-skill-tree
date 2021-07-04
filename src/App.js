@@ -34,10 +34,6 @@ function App() {
     getXP(){
       return this.skills ? (this.skills.length + 1) * 10 : 0;
     }
-
-    addSkill(skill){
-      this.skills.push(skill);
-    }
   }
 
   React.useEffect(()=>{
@@ -94,6 +90,13 @@ function App() {
     }else{
       setError('Cannot add more than 3 lessons to group');
     }
+  }
+
+  function addSkill(item){
+    const newGroups = [...GROUPS];
+    const newItem = newGroups[item.group].find(i =>(i.id === item.id));
+    newItem && newItem.push("New Skill");
+    setGROUPS([...newGroups]);
   }
 
   function handleAddGroup(){
@@ -187,7 +190,7 @@ function App() {
       <div className="error">{error}</div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addChild={createChild} deleteItem={deleteItem}/>
+          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addSkill={addSkill} addChild={createChild} deleteItem={deleteItem}/>
       </div>
       <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
     </div>
