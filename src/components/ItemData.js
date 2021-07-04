@@ -27,6 +27,10 @@ function ItemData(props) {
     props.addChild(props.item);
   }
 
+  function handleChangeParents(e){
+    props.changeParents(props.item, e.target.value);
+  }
+
   function handleDelete(){
     props.deleteItem(props.item);
   }
@@ -47,10 +51,10 @@ function ItemData(props) {
       
       { my.parents.length > 0 &&     
       <> 
-      <label for="item-data__parentList">Change prerequisites:</label>
-      <select name="parents" id="parents" multiple>
-      {my.parents.map((parent) => <option value={parent.id}>{parent.name}</option>)}
-      </select>
+        <label for="item-data__parentList">Change prerequisites:</label>
+        <select name="parents" id="parents" multiple onChange={handleChangeParents}>
+          {my.parents.map((parent) => <option value={parent.id}>{parent.name}</option>)}
+        </select>
       </>
       }
       

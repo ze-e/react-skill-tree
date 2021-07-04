@@ -214,19 +214,44 @@ function App() {
     setGROUPS(newGroups);
   }
 
+  function changeParents(item, values){
+    const newGroups = [...GROUPS];
+    newGroups[item.group].parents = [...values];
+    newGroups[item.group - 1] && newGroups[item.group - 1].forEach((i)=>{
+      values.includes(i) ? !i.children.includes(item) && i.children.push(item) : i.children.includes(item) && i.children.splice(i.children.indexOf(item),1);
+    })
+  }
+
   return (
     <div className="App">
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
-          {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => <GroupElement key={index} id={index} selected={index === selectedGroup && true} children={group}/>)}
+          {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => 
+            <GroupElement 
+              key={index} 
+              id={index} 
+              selected={index === selectedGroup && true} 
+              children={group}
+            />)}
         </ol>
       </div>
       <div className="error">{error}</div>
       <div class="data">
         <h1>{selectedGroup && `Level : ${selectedGroup}`}</h1>
-          <GroupData groupNumber={selectedGroup} children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} changeName={changeName} addLesson={addLesson} addSkill={addSkill} changeSkill={changeSkill} deleteSkill={deleteSkill} addChild={createChild} deleteItem={deleteItem}/>
+          <GroupData 
+            groupNumber={selectedGroup} 
+            children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} 
+            changeName={changeName} 
+            addLesson={addLesson} 
+            addSkill={addSkill} 
+            changeSkill={changeSkill}
+            changeParents={changeParents} 
+            deleteSkill={deleteSkill} 
+            addChild={createChild} 
+            deleteItem={deleteItem}
+          />
       </div>
-      <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
+      {/* <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button> */}
     </div>
   );
 }
