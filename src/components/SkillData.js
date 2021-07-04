@@ -13,7 +13,7 @@ function SkillData(props) {
   }
 
   function handleDelete(){
-    props.deleteSkill(props.item);
+    props.deleteSkill(props.item, props.parent);
   }
 
   return(
@@ -22,7 +22,6 @@ function SkillData(props) {
       <p className="skill__xp">+ 10 XP / Gold</p>
       <button className="skill__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
       <button className="skill__delete" type="button" onClick={handleDelete}>Delete</button>
-
     </li>
   )
 }

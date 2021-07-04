@@ -116,11 +116,21 @@ function App() {
     setGROUPS([...newGroups]);
   }
 
-  function deleteSkill(item){
+  function deleteSkill(skill, item){
     const newGroups = [...GROUPS];
     const newItem = newGroups[item.group].find(i =>(i.id === item.id));
-    newItem && newItem.deleteSkill("New Skill");
-    setGROUPS([...newGroups]);
+    if(newItem && newItem.skills && newItem.skills.length > 1){
+      newItem.deleteSkill(skill);
+      setGROUPS([...newGroups]);
+      //remove errors
+      setError('');
+
+    } 
+    
+    else if(newItem && newItem.skills && newItem.skills.length === 1){
+      setError('Must have at least one skill per lesson');
+    }
+
   }
 
   function handleAddGroup(){
