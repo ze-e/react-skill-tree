@@ -20,7 +20,7 @@ function App() {
       parents = [],
       children = [],
       color = "black",
-      skills = ["New Skill"]
+      skills = ["Skill 1"]
     }={}){
     
     this.id = uuidv4();
@@ -189,11 +189,9 @@ function App() {
     newGroups[item.group].splice(itemToRemove, 1);
     
     //remove item from parents
-    // item.group > 0 && newGroups[item.group-1].forEach((i)=> i.children = i.children.filter((child)=>child.id !== item.id));
     item.parents.length > 0 && item.parents.forEach((i)=> i.children = i.children.filter((child)=>child.id !== item.id));
 
     //remove item from children
-    // newGroups[item.group+1] && newGroups[item.group+1].forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
     item.children.length > 0 && item.children.forEach((i)=> i.parents = i.parents.filter((parent)=>parent.id !== item.id));
 
 
@@ -255,7 +253,7 @@ function App() {
             deleteItem={deleteItem}
           />
       </div>
-      <button className="add-group" type="button" onClick={handleAddGroup}>Add Unit</button>
+      {GROUPS && GROUPS.length === 0 && <button className="add-group" type="button" onClick={handleAddGroup}>Start lesson plan!</button>}
     </DataContext.Provider>
     </div>
   );

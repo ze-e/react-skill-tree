@@ -43,7 +43,7 @@ ol{
 }
 
 .item-data{
-  border-bottom:1px solid black;
+  border:1px solid black;
   max-width: 200px;
   margin: 2px;
 }
@@ -66,6 +66,11 @@ ol{
 
 .item-data__skills{
   list-style: none;
+}
+
+.skill{
+  border:1px solid black;
+  margin: 2px;
 }
 
 .error{

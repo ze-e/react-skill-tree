@@ -31,8 +31,9 @@ function ItemData(props) {
   }
 
   function handleChangeParents(e){
-    console.log(e.target.value);
-    props.changeParents(props.item, e.target.value);
+    console.log(Array.from(e.target.selectedOptions, option => option.value));
+    const values = Array.from(e.target.selectedOptions, option => option.value);
+    props.changeParents(props.item, values);
   }
 
   function handleDelete(){
@@ -40,7 +41,7 @@ function ItemData(props) {
   }
 
   return(
-    <li className= 'item-data'>
+    <li className = {`item-data ${my.color}`}>
       <h4 className='item-data__lesson'>Lesson {my.group} - {props.number} :</h4> 
       {!editing ? <h5 className='item-data__name'>{my.name}</h5>:<input type="text" defaultValue={my.name} onChange={handleChangeName} onBlur={toggleEdit}></input>}
       <p className='item-data__XP'>XP/GOLD : {my.xp}</p>
