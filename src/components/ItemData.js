@@ -31,7 +31,6 @@ function ItemData(props) {
   }
 
   function handleChangeParents(e){
-    console.log(Array.from(e.target.selectedOptions, option => option.value));
     const values = Array.from(e.target.selectedOptions, option => option.value);
     props.changeParents(props.item, values);
   }
@@ -48,11 +47,7 @@ function ItemData(props) {
       <button className="item-data__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
       <button className="item-data__delete" type="button" onClick={handleDelete}>Delete</button>
       <button className="item-data__add-child" type="button" onClick={handleAddChild}>Next Lesson</button>
-      <button className="item-data__add-skill" type="button" onClick={handleAddSkill}>Add Skill</button>
       <button className="item-data__add-lesson" type="button" onClick={handleAddLesson}>Add More Lessons</button>
-      <ol className="item-data__skills">
-        {my.skills && my.skills.length > 0 &&  my.skills.map((skill, index) => <SkillData key={index} index={index} item={skill} parent={props.item} addSkill={props.addSkill} changeSkill={props.changeSkill} deleteSkill={props.deleteSkill} changeName={props.changeName}/>)}
-      </ol>
       
       { editing && DATA[my.group-1] && DATA[my.group-1].length > 0 &&     
       <> 
@@ -62,7 +57,11 @@ function ItemData(props) {
         </select>
       </>
       }
-      
+      <ol className="item-data__skills">
+        {my.skills && my.skills.length > 0 &&  my.skills.map((skill, index) => <SkillData key={index} index={index} item={skill} parent={props.item} addSkill={props.addSkill} changeSkill={props.changeSkill} deleteSkill={props.deleteSkill} changeName={props.changeName}/>)}
+      </ol>
+      <button className="item-data__add-skill" type="button" onClick={handleAddSkill}>Add Skill</button>
+
       <ol className="item-data__parents">
         {my.parents.length > 0 && 'Complete any of these to move to the next lesson:'}
         {my.parents.length > 0 &&  my.parents.map((parent, index) => <li key={index}>{parent && parent.name && parent.name}</li>)}
