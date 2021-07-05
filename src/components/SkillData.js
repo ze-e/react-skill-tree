@@ -17,7 +17,7 @@ function SkillData(props) {
   }
 
   return(
-    <li className="skill">
+    <li className={`skill ${props.parent.color}`}>
       {!editing ? <h5 className='skill__name'>{props.item}</h5>:<input type="text" defaultValue={props.item} onChange={handleChangeName} onBlur={toggleEdit}></input>}
       <p className="skill__xp">+ 10 XP / Gold</p>
       <button className="skill__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
