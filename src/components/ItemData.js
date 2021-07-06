@@ -42,7 +42,7 @@ function ItemData(props) {
 
   return(
     <li className = {`item-data ${my.color}`}>
-      <h4 className='item-data__lesson'>Lesson {my.group} - {props.number} :</h4> 
+      <h4 className='item-data__lesson'>Lesson {my.group + 1} - {props.number + 1} :</h4> 
       {!editing ? <h5 className='item-data__name'>{my.name}</h5>:<input type="text" defaultValue={my.name} onChange={handleChangeName} onBlur={toggleEdit}></input>}
       <p className='item-data__XP'>XP/GOLD : {my.xp}</p>
       <button className="item-data__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
