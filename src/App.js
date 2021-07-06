@@ -159,8 +159,9 @@ function App() {
       }
 
       //move to child
-      const selected = Array.from(document.querySelectorAll('.item')[selectedGroup+1]) && Array.from(document.querySelectorAll('.item')[selectedGroup+1]);
-  
+      const selected = document.querySelectorAll('.group-data')[selectedGroup+1] && document.querySelectorAll('.group-data')[selectedGroup+1];
+      console.log(document.querySelectorAll('.group-data'));
+      console.log(selected);
       if(selected && selected != null){
         const oldSelected = document.querySelector('.selected');
         oldSelected && oldSelected != null && oldSelected.classList.remove('selected');
