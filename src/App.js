@@ -218,8 +218,6 @@ function App() {
     const newGroups = [...GROUPS];
 
     newGroups[item.group].find((i)=>i.id === item.id).parents = [...values];
-
-    // newGroups[item.group].find((i)=>i.id === item.id).parents = [...values];
     
     // newGroups[item.group - 1] && newGroups[item.group - 1].forEach((i)=>{
     //   values.includes(i) ? !i.children.includes(item) && i.children.push(item) : i.children.includes(item) && i.children.splice(i.children.indexOf(item),1);

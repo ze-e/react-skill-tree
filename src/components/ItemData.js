@@ -31,8 +31,8 @@ function ItemData(props) {
   }
 
   function handleChangeParents(e){
-    const values = Array.from(e.target.selectedOptions, option => option.value);
-    //const values = Array.from(e.target.selectedOptions);
+    const ids = Array.from(e.target.selectedOptions, option => option.value);
+    const values = DATA[my.group-1] && DATA[my.group-1].filter(i => ids.includes(i.id) ? true : false);
     props.changeParents(props.item, values);
   }
 
@@ -52,7 +52,7 @@ function ItemData(props) {
       <> 
         <label for="item-data__parentList">Change prerequisites:</label>
         <select name="parents" id="parents" multiple onChange={handleChangeParents}>
-          {DATA[my.group-1].map((parent) => <option value={parent}>{parent.name}</option>)}
+          {DATA[my.group-1].map((parent) => <option value={parent.id}>{parent.name}</option>)}
         </select>
       </>
       }
