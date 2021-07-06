@@ -216,12 +216,17 @@ function App() {
 
   function changeParents(item, values){
     const newGroups = [...GROUPS];
-    //console.log(newGroups[item.group].find((i)=>i.id === item.id).parents);
-    newGroups[item.group].find((i)=>i.id === item.id).parents = [...values];
+    let newParents = [];
+    values.forEach(value => {
+      newParents.push(value);
+    });
+    newGroups[item.group].find((i)=>i.id === item.id).parents = [...newParents];
+
+    // newGroups[item.group].find((i)=>i.id === item.id).parents = [...values];
+    
     // newGroups[item.group - 1] && newGroups[item.group - 1].forEach((i)=>{
     //   values.includes(i) ? !i.children.includes(item) && i.children.push(item) : i.children.includes(item) && i.children.splice(i.children.indexOf(item),1);
     // })
-    //console.log(item.parents);
 
     //
     setGROUPS([...newGroups]);
