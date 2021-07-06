@@ -1,7 +1,7 @@
 import React from 'react';
 
 function SkillData(props) {
-  const [editing, setEditing] = React.useState(false);
+  const [editing, setEditing] = React.useState(true);
 
   function toggleEdit(){
     setEditing(!editing);

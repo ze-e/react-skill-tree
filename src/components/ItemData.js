@@ -9,9 +9,9 @@ function ItemData(props) {
 
   const [editing, setEditing] = React.useState(true);
 
-  function toggleEdit(){
+  function toggleEdit(e){
+    e.preventDefault();
     setEditing(!editing);
-    editing && document.querySelector(".item-data__name").focus();
   }
 
   function handleChangeName(e){
@@ -44,9 +44,13 @@ function ItemData(props) {
   return(
     <li className = {`item-data ${my.color}`}>
       <h4 className='item-data__lesson'>Lesson {my.group + 1} - {props.number + 1} :</h4> 
-      {!editing ? <h5 className='item-data__name'>{my.name}</h5>:<input type="text" defaultValue={my.name} onChange={handleChangeName} onBlur={toggleEdit}></input>}
+      {!editing ? <h5 className='item-data__name' onClick={toggleEdit}>{my.name}</h5>:
+        <form onClick={toggleEdit}>
+          <input className='item-data__name-input' type="text" defaultValue={my.name} onChange={handleChangeName} onBlur={toggleEdit}></input>
+          <button className="item-data__edit" type="submit">Save</button>
+        </form>
+      }
       <p className='item-data__XP'>XP/GOLD : {my.xp}</p>
-      <button className="item-data__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
       <button className="item-data__delete" type="button" onClick={handleDelete}>Delete</button>
       <button className="item-data__add-child" type="button" onClick={handleAddChild}>Next Lesson</button>      
       { editing && DATA[my.group-1] && DATA[my.group-1].length > 0 &&     

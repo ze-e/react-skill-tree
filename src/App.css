@@ -46,6 +46,8 @@ ol{
   border:1px solid black;
   max-width: 200px;
   margin: 2px;
+  margin-left: 10px;
+  padding-left: 10px;
 }
 
 .item-data.selected{
@@ -71,6 +73,8 @@ ol{
 .skill{
   border:1px solid black;
   margin-left: 10px;
+  padding-left: 10px;
+
 }
 
 .error{
