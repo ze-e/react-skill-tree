@@ -7,7 +7,7 @@ function ItemData(props) {
   const DATA = React.useContext(DataContext);
   const my = props.item;
 
-  const [editing, setEditing] = React.useState(false);
+  const [editing, setEditing] = React.useState(true);
 
   function toggleEdit(){
     setEditing(!editing);

@@ -15,22 +15,21 @@ function App() {
 
   class Item {
     constructor({
-      name = "New Lesson",
+      name,
       group,
       parents = [],
       children = [],
-      color = "black",
-      skills = ["Skill 1"]
+      color
     }={}){
     
     this.id = uuidv4();
-    this.name = name;
+    this.name = name || `New Lesson ${group && group} ${group.length && ' - ' + group.length}`;
     this.xp = this.getXP();
     this.group = group;
     this.parents = parents;
     this.children = children;
-    this.color = color;
-    this.skills = skills;
+    this.color = color || "black";
+    this.skills = ["Skill 1"];
     }
 
     getXP(){
