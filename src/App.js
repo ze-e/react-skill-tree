@@ -48,10 +48,6 @@ function App() {
     }
   }
 
-  // React.useEffect(()=>{
-  //   console.log(GROUPS);
-  // })
-
   function handleClick(e){
     const oldSelected = document.querySelector('.selected');
     oldSelected && oldSelected != null && oldSelected.classList.remove('selected');

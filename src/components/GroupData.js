@@ -5,7 +5,8 @@ function GroupData(props) {
   const [XP, setXP] = React.useState(0);
   
   React.useEffect(()=>{
-    props.children && props.children.forEach(i => {setXP(XP + i.xp)});
+    const newXP = props.children && Array.from(props.children, child => child.xp).reduce((sum, curr) => sum + curr);
+    setXP(newXP);
   },[props.children && props.children.length]);
 
   return(
