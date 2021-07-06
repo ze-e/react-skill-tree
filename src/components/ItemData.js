@@ -32,6 +32,7 @@ function ItemData(props) {
 
   function handleChangeParents(e){
     const values = Array.from(e.target.selectedOptions, option => option.value);
+    console.log(values);
     props.changeParents(props.item, values);
   }
 
@@ -46,14 +47,12 @@ function ItemData(props) {
       <p className='item-data__XP'>XP/GOLD : {my.xp}</p>
       <button className="item-data__edit" type="button" onClick={toggleEdit}>{editing ? 'Save' : 'Edit'}</button>
       <button className="item-data__delete" type="button" onClick={handleDelete}>Delete</button>
-      <button className="item-data__add-child" type="button" onClick={handleAddChild}>Next Lesson</button>
-      <button className="item-data__add-lesson" type="button" onClick={handleAddLesson}>Add More Lessons</button>
-      
+      <button className="item-data__add-child" type="button" onClick={handleAddChild}>Next Lesson</button>      
       { editing && DATA[my.group-1] && DATA[my.group-1].length > 0 &&     
       <> 
         <label for="item-data__parentList">Change prerequisites:</label>
         <select name="parents" id="parents" multiple onChange={handleChangeParents}>
-          {DATA[my.group-1].map((parent) => <option value={parent.id}>{parent.name}</option>)}
+          {DATA[my.group-1].map((parent) => <option value={parent}>{parent.name}</option>)}
         </select>
       </>
       }
@@ -63,13 +62,14 @@ function ItemData(props) {
       <button className="item-data__add-skill" type="button" onClick={handleAddSkill}>Add Skill</button>
 
       <ol className="item-data__parents">
-        {my.parents.length > 0 && 'Complete any of these to move to the next lesson:'}
+        {my.parents.length > 0 && 'Complete any of these to unlock this lesson:'}
         {my.parents.length > 0 &&  my.parents.map((parent, index) => <li key={index}>{parent && parent.name && parent.name}</li>)}
       </ol>
       <ol className="item-data__children">
-        {my.children.length > 0 && 'Complete me to move on to these lessons:'}
+        {my.children.length > 0 && 'Complete me to unlock these lessons:'}
         {my.children.length > 0 && my.children.map((child, index) => <li key={index}>{child && child.name && child.name}</li>)}
       </ol>
+      <button className="item-data__add-lesson" type="button" onClick={handleAddLesson}>Add More Lessons</button>
     </li>
   )
 }
