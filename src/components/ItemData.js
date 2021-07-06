@@ -31,8 +31,8 @@ function ItemData(props) {
   }
 
   function handleChangeParents(e){
-    // const values = Array.from(e.target.selectedOptions, option => option.value);
-    const values = Array.from(e.target.selectedOptions);
+    const values = Array.from(e.target.selectedOptions, option => option.value);
+    //const values = Array.from(e.target.selectedOptions);
     props.changeParents(props.item, values);
   }
 

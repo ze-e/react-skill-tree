@@ -216,11 +216,8 @@ function App() {
 
   function changeParents(item, values){
     const newGroups = [...GROUPS];
-    let newParents = [];
-    values.forEach(value => {
-      newParents.push(value);
-    });
-    newGroups[item.group].find((i)=>i.id === item.id).parents = [...newParents];
+
+    newGroups[item.group].find((i)=>i.id === item.id).parents = [...values];
 
     // newGroups[item.group].find((i)=>i.id === item.id).parents = [...values];
     
