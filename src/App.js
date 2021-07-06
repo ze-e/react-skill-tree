@@ -216,10 +216,12 @@ function App() {
 
   function changeParents(item, values){
     const newGroups = [...GROUPS];
-    newGroups[item.group].parents = [...values];
-    newGroups[item.group - 1] && newGroups[item.group - 1].forEach((i)=>{
-      values.includes(i) ? !i.children.includes(item) && i.children.push(item) : i.children.includes(item) && i.children.splice(i.children.indexOf(item),1);
-    })
+    newGroups[item.group][item].parents = [...values];
+    // newGroups[item.group - 1] && newGroups[item.group - 1].forEach((i)=>{
+    //   values.includes(i) ? !i.children.includes(item) && i.children.push(item) : i.children.includes(item) && i.children.splice(i.children.indexOf(item),1);
+    // })
+
+    //
     setGROUPS([...newGroups]);
   }
 
