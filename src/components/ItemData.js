@@ -11,6 +11,7 @@ function ItemData(props) {
 
   function toggleEdit(){
     setEditing(!editing);
+    editing && document.querySelector(".item-data__name").focus();
   }
 
   function handleChangeName(e){

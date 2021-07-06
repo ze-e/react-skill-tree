@@ -16,7 +16,7 @@ function App() {
   class Item {
     constructor({name, group, parents, children, color}={}){
     this.id = uuidv4();
-    this.name = name || `New Lesson ${group && group} ${group.length && ' - ' + group.length}`;
+    this.name = name || `New Lesson`;
     this.xp = this.getXP();
     this.group = group;
     this.parents = parents || [];
@@ -220,13 +220,15 @@ function App() {
       <DataContext.Provider value={GROUPS}>
       <div className="timeline">
         <ol className="column" onClick={handleClick}>
-          {GROUPS && GROUPS.length > 0 && GROUPS.map((group, index) => 
+          {GROUPS && GROUPS.length > 0 ? GROUPS.map((group, index) => 
             <GroupElement 
               key={index} 
               id={index} 
               selected={index === selectedGroup && true} 
               children={group}
-            />)}
+            />)
+          :
+            <button className="add-group" type="button" onClick={handleAddGroup}>Start lesson plan!</button>}
         </ol>
       </div>
       <div className="error">{error}</div>
@@ -245,7 +247,6 @@ function App() {
             deleteItem={deleteItem}
           />
       </div>
-      {GROUPS && GROUPS.length === 0 && <button className="add-group" type="button" onClick={handleAddGroup}>Start lesson plan!</button>}
     </DataContext.Provider>
     </div>
   );
