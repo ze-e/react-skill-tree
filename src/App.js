@@ -14,20 +14,13 @@ function App() {
   const [error, setError] = React.useState('');
 
   class Item {
-    constructor({
-      name,
-      group,
-      parents = [],
-      children = [],
-      color
-    }={}){
-    
+    constructor({name, group, parents, children, color}={}){
     this.id = uuidv4();
     this.name = name || `New Lesson ${group && group} ${group.length && ' - ' + group.length}`;
     this.xp = this.getXP();
     this.group = group;
-    this.parents = parents;
-    this.children = children;
+    this.parents = parents || [];
+    this.children = children || [];
     this.color = color || "black";
     this.skills = ["Skill 1"];
     }
