@@ -10,7 +10,7 @@ function GroupData(props) {
   },[props.children && props.children.length]);
 
   return(
-    <>
+    <div className="item-data">
     <h2 className="item-data__groupXp">{XP > 0 && `${XP} XP / Gold`}</h2>
     <ol className="item-data__group">
       {props.children && props.children.length > 0 && props.children.map((child, index) => 
@@ -30,7 +30,7 @@ function GroupData(props) {
         />
       )}
     </ol>
-    </>
+    </div>
   )
 }
 
