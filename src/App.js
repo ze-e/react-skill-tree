@@ -158,6 +158,17 @@ function App() {
         myParent && myParent.children.push(newItem);
       }
 
+      //move to child
+      const selected = Array.from(document.querySelectorAll('.item')[selectedGroup+1]);
+  
+      if(selected && selected != null){
+        const oldSelected = document.querySelector('.selected');
+        oldSelected && oldSelected != null && oldSelected.classList.remove('selected');
+        
+        selected.classList.add('selected');
+        selected.id && setSelectedGroup(selected.id);
+      }
+
       //update groups
       setGROUPS([...newGroups]);
 
