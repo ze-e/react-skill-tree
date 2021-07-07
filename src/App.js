@@ -23,7 +23,18 @@ function App() {
       selected.classList.add('selected');
       selected.id && setSelectedGroup(itemContentList.length-1);
     }
-  },[GROUPS.length])
+  },[GROUPS.length]);
+
+  React.useEffect(()=>{
+    //move to child
+    const itemContentList = document.querySelectorAll('.item');
+    const selected = itemContentList[selectedGroup];
+    if(selected && selected != null){
+      const oldSelected = document.querySelector('.selected');
+      oldSelected && oldSelected != null && oldSelected.classList.remove('selected');
+      selected.classList.add('selected');
+    }
+  },[selectedGroup]);
 
   class Item {
     constructor({name, group, parents, children, color}={}){
@@ -173,6 +184,9 @@ function App() {
 
       //update groups
       setGROUPS([...newGroups]);
+
+      //update selectedGroup
+      setSelectedGroup(parseInt(selectedGroup)+1);
 
       //remove errors
       setError('');
