@@ -7,14 +7,11 @@ function ItemData(props) {
   const DATA = React.useContext(DataContext);
   const my = props.item;
 
-  const formRef = React.useRef();
-
-  const [editing, setEditing] = React.useState(true);
+  const [editing, setEditing] = React.useState(false);
 
   function toggleEdit(e){
     e.preventDefault();
     setEditing(!editing);
-    editing && formRef.focus(true);
   }
 
   function handleChangeName(e){
@@ -48,7 +45,7 @@ function ItemData(props) {
     <li className = {`item-data ${my.color}`}>
       <h4 className='item-data__lesson'>Lesson {my.group + 1} - {props.number + 1} :</h4> 
       {!editing ? <h5 className='item-data__name' onClick={toggleEdit}>{my.name}</h5>:
-        <form onSubmit={toggleEdit} ref={formRef}>
+        <form onSubmit={toggleEdit}>
           <input className='item-data__name-input' type="text" defaultValue={my.name} onChange={handleChangeName}></input>
           <button className="item-data__edit" type="submit">Save</button>
         </form>
