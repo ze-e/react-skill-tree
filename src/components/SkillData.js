@@ -23,7 +23,8 @@ function SkillData(props) {
       <h5 className='skill__name' onClick={toggleEdit}>{props.item}</h5>:
       <form onSubmit={toggleEdit}>
         <input type="text" defaultValue={props.item} onChange={handleChangeName}></input>
-      {editing && <button className="skill__edit" type="submit">Save</button>}
+      {editing ? <button className="skill__edit" type="submit">Save</button>:<button className="skill__edit" onClick={toggleEdit} type="button">Edit</button>}        
+
       </form>}
       <p className="skill__xp">+ 10 XP / Gold</p>
       <button className="skill__delete" type="button" onClick={handleDelete}>Delete</button>
