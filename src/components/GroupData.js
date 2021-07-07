@@ -11,6 +11,7 @@ function GroupData(props) {
 
   return(
     <div className="group-data">
+    <h1>{props.groupNumber + 1 > 0 && `Unit : ${parseInt(props.groupNumber) + 1}`}</h1>
     <h2 className="item-data__groupXp">{XP > 0 && `${XP} XP / Gold`}</h2>
     <ol className="item-data__group">
       {props.children && props.children.length > 0 && props.children.map((child, index) => 

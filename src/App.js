@@ -164,6 +164,9 @@ function App() {
     }
     //update groups
     setGROUPS([...newGroups, itemsToAdd]);
+
+    //update selectedGroup
+    setSelectedGroup(parseInt(selectedGroup)+1);
   }
 
   function createChild(parent){
@@ -260,7 +263,6 @@ function App() {
       </div>
       <div className="error">{error}</div>
       <div class="data">
-        <h1>{selectedGroup && `Level : ${parseInt(selectedGroup) + 1}`}</h1>
           <GroupData 
             groupNumber={selectedGroup} 
             children={GROUPS && GROUPS[selectedGroup] && GROUPS[selectedGroup]} 
