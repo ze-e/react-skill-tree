@@ -54,7 +54,8 @@ function ItemData(props) {
       <button className="item-data__delete" type="button" onClick={handleDelete}>Delete</button>
       <button className="item-data__add-child" type="button" onClick={handleAddChild}>Next Lesson</button>      
       { editing && DATA[my.group-1] && DATA[my.group-1].length > 0 &&     
-      <> 
+      <>
+        <br/> 
         <label for="item-data__parentList">Change prerequisites:</label>
         <select name="parents" id="parents" multiple onChange={handleChangeParents}>
           {DATA[my.group-1].map((parent) => <option value={parent.id}>{parent.name}</option>)}

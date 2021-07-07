@@ -13,6 +13,18 @@ function App() {
   const [GROUPS, setGROUPS] = React.useState([]);
   const [error, setError] = React.useState('');
 
+  React.useEffect(()=>{
+    //move to child
+    const itemContentList = document.querySelectorAll('.item');
+    const selected = itemContentList[itemContentList.length-1];
+    if(selected && selected != null){
+      const oldSelected = document.querySelector('.selected');
+      oldSelected && oldSelected != null && oldSelected.classList.remove('selected');
+      selected.classList.add('selected');
+      selected.id && setSelectedGroup(itemContentList.length-1);
+    }
+  },[GROUPS.length])
+
   class Item {
     constructor({name, group, parents, children, color}={}){
     this.id = uuidv4();
@@ -161,19 +173,6 @@ function App() {
 
       //update groups
       setGROUPS([...newGroups]);
-
-      //move to child
-      const itemContentList = document.querySelectorAll('.item');
-      const selected = itemContentList[itemContentList.length-1];
-      console.log(itemContentList);
-      console.log(selected);
-      if(selected && selected != null){
-        const oldSelected = document.querySelector('.selected');
-        oldSelected && oldSelected != null && oldSelected.classList.remove('selected');
-
-        selected.classList.add('selected');
-        selected.id && setSelectedGroup(selected.id);
-      }
 
       //remove errors
       setError('');
