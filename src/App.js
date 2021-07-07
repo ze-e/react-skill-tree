@@ -158,9 +158,14 @@ function App() {
         myParent && myParent.children.push(newItem);
       }
 
+
+      //update groups
+      setGROUPS([...newGroups]);
+
       //move to child
-      const selected = document.querySelectorAll('.group-data')[selectedGroup+1] && document.querySelectorAll('.group-data')[selectedGroup+1];
-      console.log(document.querySelectorAll('.group-data'));
+      const itemContentList = document.querySelectorAll('.item');
+      const selected = itemContentList[itemContentList.length-1];
+      console.log(itemContentList);
       console.log(selected);
       if(selected && selected != null){
         const oldSelected = document.querySelector('.selected');
@@ -169,9 +174,6 @@ function App() {
         selected.classList.add('selected');
         selected.id && setSelectedGroup(selected.id);
       }
-
-      //update groups
-      setGROUPS([...newGroups]);
 
       //remove errors
       setError('');
