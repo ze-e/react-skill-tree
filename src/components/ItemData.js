@@ -44,13 +44,13 @@ function ItemData(props) {
   return(
     <li className = {`item-data ${my.color}`}>
       <h4 className='item-data__lesson'>Lesson {my.group + 1} - {props.number + 1} :</h4> 
+      <p className='item-data__XP'>XP/GOLD : {my.xp}</p>
       {!editing ? <h5 className='item-data__name' onClick={toggleEdit}>{my.name}</h5>:
         <form onSubmit={toggleEdit}>
           <input className='item-data__name-input' type="text" defaultValue={my.name} onChange={handleChangeName}></input>
           {editing ? <button className="item-data__save" type="submit">Save</button>:<button className="item-data__edit" onClick={toggleEdit} type="button">Edit</button>}        
         </form>
       }
-      <p className='item-data__XP'>XP/GOLD : {my.xp}</p>
       {!editing && <button className="item-data__edit" type="button" onClick={toggleEdit}>Edit</button>}
       <button className="item-data__delete" type="button" onClick={handleDelete}>Delete</button>
       <button className="item-data__add-child" type="button" onClick={handleAddChild}>Next Lesson</button>      
@@ -61,7 +61,8 @@ function ItemData(props) {
 
 
       {editing ? DATA[my.group-1] && DATA[my.group-1].length > 0 &&
-      <> 
+      <>
+      <br />
       <label for="item-data__parentList">Change prerequisites:</label>
       <select name="parents" id="parents" multiple onChange={handleChangeParents}>
         {DATA[my.group-1].map((parent) => <option value={parent.id}>{parent.name}</option>)}
