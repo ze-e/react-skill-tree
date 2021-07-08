@@ -59,6 +59,7 @@ function ItemData(props) {
             </select>
             </>
           }
+          <br/>
           <button className="item-data__save" type="submit">Save</button>
         </form>
       :
